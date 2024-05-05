@@ -35,6 +35,8 @@ const SportsBook = () => {
           <SportsCard key={card.id} type={card.type} />
         ))}
       </div>
+
+      
     </section>
   )
 }

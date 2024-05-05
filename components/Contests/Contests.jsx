@@ -4,11 +4,11 @@ import Contextcard from './Contextcard'
 const Contests = () => {
     return (
         <div>
-            <Contextcard type="NBA" />
-            <Contextcard />
-            <Contextcard type="EPL" />
-            <Contextcard type="EPL" />
-            <Contextcard />
+            <Contextcard type="NBA" title="NBA"/>
+            <Contextcard type="NBA" title="NBA"/>
+            <Contextcard type="EPL" title="EPL"/>
+            <Contextcard type="EPL" title="EPL"/>
+            <Contextcard type="NBA" title="NBA"/>
         </div>
     )
 }
