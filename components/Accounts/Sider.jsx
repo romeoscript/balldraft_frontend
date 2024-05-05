@@ -4,7 +4,7 @@ import Icon from '@/Reusable/Icons/Icons'
 
 const Sider = () => {
     return (
-        <div className='border-l-[1px] border-gray'>
+        <div className='border-r-[1px] border-gray p-[1rem]'>
             <div>
                 <UserProfile />
                 <ul>
@@ -16,7 +16,6 @@ const Sider = () => {
                     <li className='flex items-center gap-3 text-[#ff0000]'><Icon type="logout" />Sign Out</li>
                 </ul>
             </div>
-
             <div className='flex items-center gap-4 text-[#012C51]'>
                 <img
                     className=" w-14 h-14 rounded-full object-cover"

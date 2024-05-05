@@ -4,10 +4,14 @@ import React from 'react'
 
 const page = () => {
     return (
-        <div>
-            <Sider />
-            <MainContent />
-        </div>
+        <section>
+            <div className='flex gap-4 p-[1rem] justify-around'>
+                <Sider />
+                <MainContent />
+
+            </div>
+        </section>
+
     )
 }
 
