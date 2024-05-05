@@ -10,10 +10,11 @@ const MainContent = () => {
       <Balance />
       <figure>
         <RewardBanner />
+        <Referal />
         <div className='flex text-black items-center justify-between p-[1rem]'>
           <h2 className='text-2xl'>Recent Transactions </h2> <p>See all</p>
         </div>
-        <Referal />
+      
         <TransactionTable />
       </figure>
     </div>
