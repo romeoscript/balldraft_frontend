@@ -4,16 +4,16 @@ import Icon from '@/Reusable/Icons/Icons'
 
 const Sider = () => {
     return (
-        <div className='border-r-[1px] border-gray p-[1rem]'>
-            <div>
+        <div className='border-r-[1px] border-gray p-[1rem] flex flex-col justify-between'>
+            <div className='flex flex-col gap-20 justify-between'>
                 <UserProfile />
                 <ul>
-                    <li className='flex items-center gap-3 text-[#012C51]'> <Icon type="tickets" /> Tickets</li>
-                    <li className='flex items-center gap-3 text-[#012C51]'><Icon type="log" />Activity Log</li>
-                    <li className='flex items-center gap-3 text-[#012C51]'><Icon type="game" />Responsible Gambling</li>
-                    <li className='flex items-center gap-3 text-[#012C51]'><Icon type="history" />Transaction History</li>
-                    <li className='flex items-center gap-3 text-[#012C51]'><Icon type="tax" />Taxing & Forms</li>
-                    <li className='flex items-center gap-3 text-[#ff0000]'><Icon type="logout" />Sign Out</li>
+                    <li className='flex items-center gap-3 text-[#012C51] py-[0.5rem] hover:text-white hover:bg-[#012c51] rounded-md'> <Icon type="tickets" /> Tickets</li>
+                    <li className='flex items-center gap-3 text-[#012C51] py-[0.5rem] hover:text-white hover:bg-[#012c51] rounded-md'><Icon type="log" />Activity Log</li>
+                    <li className='flex items-center gap-3 text-[#012C51] py-[0.5rem] hover:text-white hover:bg-[#012c51] rounded-md'><Icon type="game" />Responsible Gambling</li>
+                    <li className='flex items-center gap-3 text-[#012C51] py-[0.5rem] hover:text-white hover:bg-[#012c51] rounded-md'><Icon type="history" />Transaction History</li>
+                    <li className='flex items-center gap-3 text-[#012C51] py-[0.5rem] hover:text-white hover:bg-[#012c51] rounded-md'><Icon type="tax" />Taxing & Forms</li>
+                    <li className='flex items-center gap-3 text-[#ff0000] py-[0.5rem] hover:text-white hover:bg-[#012c51] rounded-md'><Icon type="logout" />Sign Out</li>
                 </ul>
             </div>
             <div className='flex items-center gap-4 text-[#012C51]'>

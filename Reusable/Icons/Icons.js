@@ -17,6 +17,7 @@ const icons = {
             </defs>
         </svg>
     ),
+
     log: (
         <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0_177_12504)">
@@ -26,6 +27,27 @@ const icons = {
             <defs>
                 <clipPath id="clip0_177_12504">
                     <rect width="30" height="30" fill="white" />
+                </clipPath>
+            </defs>
+        </svg>
+
+    ),
+    copylink: (
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 11.6667V2C1 1.44772 1.44772 1 2 1H11.6667C12.219 1 12.6667 1.44772 12.6667 2V11.6667C12.6667 12.219 12.219 12.6667 11.6667 12.6667H2C1.44772 12.6667 1 12.219 1 11.6667Z" stroke="white" stroke-width="0.8" />
+            <rect x="3.33398" y="3.33325" width="11.6667" height="11.6667" rx="1" fill="white" />
+        </svg>
+
+    ),
+    arrowslant: (
+        <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_175_17180)">
+                <path d="M17.5 7L7.5 17" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M8.5 7H17.5V16" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </g>
+            <defs>
+                <clipPath id="clip0_175_17180">
+                    <rect width="24" height="24" fill="white" transform="translate(0.5)" />
                 </clipPath>
             </defs>
         </svg>

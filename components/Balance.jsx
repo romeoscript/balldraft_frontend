@@ -36,7 +36,7 @@ const Balance = () => {
                 <aside className='flex items-center gap-5 p-[1rem]'>
                     <div className="avatar">
                         <div className="w-4 rounded-full ring ">
-                            <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                            <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
                         </div>
                     </div>
                     <p> Total Balance</p>
