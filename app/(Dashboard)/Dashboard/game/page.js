@@ -17,7 +17,7 @@ export default function Home() {
 
   return (
     <div>
-      <SportsBook />
+      {/* <SportsBook /> */}
      
       <div className="bg-white border-t-[2px] flex justify-between">
         <GameTypes
@@ -31,11 +31,11 @@ export default function Home() {
           onChange={(value) => console.log("Selected value:", value)}
         />
 
-        <div className=" p-5 ">
+        <div className=" w-full p-5 ">
           <Contextcard type="EPL" title="EPL" />
+          <Contextcard type="UFC" title="UFC" />
           <Contextcard type="EPL" title="EPL" />
-          <Contextcard type="EPL" title="EPL" />
-          <Contextcard type="EPL" title="EPL" />
+          <Contextcard type="NBA" title="NBA" />
           <Contextcard type="EPL" title="EPL" />
           <Contextcard type="EPL" title="EPL" />
           <Contextcard type="EPL" title="EPL" />
