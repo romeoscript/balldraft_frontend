@@ -6,7 +6,12 @@ const MainContent = () => {
   return (
     <div>
       <Balance />
-      <TransactionTable />
+      <figure>
+        <div className='flex text-black items-center justify-between p-[1rem]'>
+          <h2 className='text-2xl'>Recent Transactions </h2> <p>See all</p>
+        </div>
+        <TransactionTable />
+      </figure>
     </div>
   )
 }

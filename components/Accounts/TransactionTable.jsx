@@ -2,13 +2,29 @@
 import React from 'react';
 import { Space, Table, Tag } from 'antd';
 import { formatDistanceToNow, parseISO } from 'date-fns';
+import Icon from '@/Reusable/Icons/Icons'
 
 const columns = [
     {
         title: 'TRANSACTION TYPE',
         dataIndex: 'type',
         key: 'type',
-        render: (text) => <a>{text}</a>,
+        render: (type) => {
+            if (type.toLowerCase() === 'deposit') {
+                return <Space>
+                    <div className=' bg-[#0163E0] p-[0.5rem] rounded-full'>
+                        <Icon type="topup" />
+                    </div>
+                    <span>{type}</span>
+                </Space>
+            } else if (type.toLowerCase() === 'withdrawal') {
+                return <Space>
+                    <div className='bg-[#FF6D00] p-[0.5rem] rounded-full'>  <Icon type="withdraw" /></div>
+
+                    <span>{type}</span>
+                </Space>
+            }
+        },
     },
     {
         title: 'TRANSACTION ID',
@@ -39,13 +55,13 @@ const columns = [
             return <Tag color={color}>{status.toUpperCase()}</Tag>;
         },
     },
-    
+
 ];
 
 const data = [
     {
         key: '1',
-        type: 'Payment',
+        type: 'withdrawal',
         id: '12345',
         amount: 32,
         date: '2024-05-02T09:30:00Z',
@@ -53,7 +69,7 @@ const data = [
     },
     {
         key: '2',
-        type: 'Refund',
+        type: 'deposit',
         id: '67890',
         amount: -42,
         date: '2024-05-04T11:00:00Z',
@@ -61,7 +77,7 @@ const data = [
     },
     {
         key: '3',
-        type: 'Payment',
+        type: 'withdrawal',
         id: '11223',
         amount: 50,
         date: '2024-05-05T15:15:00Z',
