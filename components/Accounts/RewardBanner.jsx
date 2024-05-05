@@ -5,8 +5,8 @@ import Icon from '@/Reusable/Icons/Icons'
 
 const RewardBanner = () => {
     return (
-        <div className='flex relative border-top-[1px] py-[1.5rem]'>
-            <aside className='w-4/5 relative h-[300px]'>
+        <div className='flex relative border-top-[1px] pm-[1.5rem] bg-[#E6F4FF] rounded-[20px]'>
+            <aside className='w-4/5 relative h-full'>
                 <img src={bannerImg.src} alt='banner' className=' rounded-l-[20px] w-full z-20 relative' />
                 <div className='absolute top-0 z-50 w-3/5 flex items-start px-[2rem] justify-center flex-col h-full text-white text-xl'>
                     <h2 className='text-2xl'>Earn Reward</h2>
@@ -16,8 +16,8 @@ const RewardBanner = () => {
                     </button>
                 </div>
             </aside>
-            <aside className='absolute right-0 top-0'>
-                <img src={gift.src} alt="" className='w-350px h-[350px] ' />
+            <aside className='absolute right-0 top-0 p-[0.5rem]'>
+                <img src={gift.src} alt="" className='w-320px h-[320px] ' />
             </aside>
         </div>
     )
