@@ -168,21 +168,6 @@ const Page = () => {
 
       <div className="flex justify-around items-center">
         <Players />
-        <input type="text" className="h-10 rounded-2xl outline-none border-[2px] p-2"/>
-        <div className=" flex   items-center mb-10 px-5">
-          <div className="flex flex-col gap-3 p-5 justify-center items-center">
-            <span className="text-[#808080] text-[0.7rem]">Total Salary</span>{" "}
-            <span className="font-semibold text-md">$1000 USD</span>
-          </div>
-          <div className="flex flex-col gap-3 p-5    justify-center items-center">
-            <span className="text-[#808080] text-[0.7rem]">Remaining</span>{" "}
-            <span className="font-semibold text-md">$1000 USD</span>
-          </div>
-          <div className="flex flex-col gap-3 p-5  justify-center items-center">
-            <span className="text-[#808080] text-[0.7rem]">FPPG</span>{" "}
-            <span className="font-semibold text-md">0.00</span>
-          </div>
-        </div>
       </div>
     </div>
   );
