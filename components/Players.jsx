@@ -6,7 +6,7 @@ const Players = () => {
 
   return (
     <div>
-      <ContestTables />
+      {/* <ContestTables /> */}
     </div>
   );
 };

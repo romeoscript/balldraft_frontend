@@ -4,6 +4,7 @@ import Sport from "@/public/images/Sport.svg";
 import GameCard from "@/Reusable/GameCard";
 import CircularProgressBar from "@/components/CircularProgressBar";
 import Players from "@/components/Players";
+import ContestTables from "@/components/Contests/ContestTables";
 
 const Page = () => {
   const [startIndex, setStartIndex] = useState(0);
@@ -60,7 +61,7 @@ const Page = () => {
   };
 
   return (
-    <div className="">
+    <div className="p-[1.5rem]">
       <div className="flex items-center justify-between w-full mb-10">
         <div>
           <div className="flex items-center gap-5 mb-5">
@@ -166,9 +167,7 @@ const Page = () => {
         </div>
       </div>
 
-      <div className="flex justify-around items-center">
-        <Players />
-      </div>
+       <ContestTables />
     </div>
   );
 };

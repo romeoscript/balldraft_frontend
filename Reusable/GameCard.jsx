@@ -2,7 +2,7 @@ import React from "react";
 
 const GameCard = ({ homeTeam, awayTeam, homeScore, awayScore, time }) => {
   return (
-    <div className="rounded-xl border inline-block mb-10 shadow-xl p-5">
+    <div className="rounded-xl shadow-md inline-block mb-10 shadow-xl p-5">
       <div className="flex items-center justify-between mb-5">
         <span className="text-sm">{homeTeam}</span>
         <div className="flex gap-2 items-center">
@@ -25,7 +25,7 @@ const GameCard = ({ homeTeam, awayTeam, homeScore, awayScore, time }) => {
           </svg>
         </div>
       </div>
-      <div className="flex items-center justify-between mb-10">
+      <div className="flex items-center justify-between mb-5">
         <span className="text-sm">{awayTeam}</span>
         <div className="flex gap-2 items-center">
           <span className="text-sm">{awayScore}</span>

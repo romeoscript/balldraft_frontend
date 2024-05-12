@@ -107,8 +107,8 @@ function ContestTables() {
     ];
 
     return (
-        <div style={{ padding: 24 }} className='flex flex-col lg:flex-row gap-8'>
-            <div className="flex-[1.5]">
+        <div  className='flex flex-col lg:flex-row gap-8'>
+            <div className="flex-[1.5] ">
                 <div className="flex mb-[1.5rem]">
                     <button
                         className={`px-[0.7rem] text-sm py-[0.5rem]  rounded-[20px] m-1 ${activeButton === "All" ? "bg-gray-500 text-white" : "border-[2px]"}`}
@@ -170,13 +170,11 @@ function ContestTables() {
                     >
                         RB
                     </button>
-                    <Input
-                        type="text"
-                        value={searchText}
-                        onChange={handleSearch}
-                        placeholder="Search players"
-                        style={{ width: 200, marginLeft: 10 }}
-                    />
+
+                    <label className="input input-bordered flex items-center gap-2 mx-[1rem] bg-white rounded-full">
+                        <input type="text" className="grow" onChange={handleSearch} placeholder="Search players" />
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70"><path fillRule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clipRule="evenodd" /></svg>
+                    </label>
                 </div>
                 <Table columns={columns} dataSource={availablePlayers} className="blue-header no-border" rowKey="key" />
             </div>
