@@ -19,8 +19,8 @@ import google from '@/public/images/google.svg';
 import Image from 'next/image';
 import Verifyemail from '@/components/Verifyemail';
 import Success from '@/components/Success';
-
-
+import dayjs from 'dayjs'; // Import dayjs for date formatting
+import usePostRequest from '@/Hooks/usepostRequest';
 
 const MuiFormikCheckbox = ({ label, ...props }) => {
     const [field] = useField(props);
@@ -32,7 +32,6 @@ const MuiFormikCheckbox = ({ label, ...props }) => {
         />
     );
 };
-
 
 const StyledTextField = styled(TextField)(({ theme, error }) => ({
     ...(error && {
@@ -69,6 +68,7 @@ const MuiFormikField = ({ field, form: { touched, errors }, icon, ...props }) =>
         )}
     </FormControl>
 );
+
 const MuiFormikDatePicker = ({ label, ...props }) => {
     const [field, meta, helpers] = useField(props);
     return (
@@ -102,36 +102,57 @@ const MuiFormikDatePicker = ({ label, ...props }) => {
 
 const Page = () => {
     const validationSchema = Yup.object().shape({
-        fullname: Yup.string().required('Full name is required'),
+        first_name: Yup.string().required('First name is required'),
+        last_name: Yup.string().required('Last name is required'),
         email: Yup.string().email('Invalid email address').required('Email is required'),
-        DOB: Yup.date().required('Date of birth is required').nullable(),
+        dob: Yup.date().required('Date of birth is required').nullable(),
         password: Yup.string().required('Password is required'),
-        confirmPassword: Yup.string()
+        confirm_password: Yup.string()
             .oneOf([Yup.ref('password'), null], 'Passwords must match')
             .required('Confirm password is required'),
     });
 
     const initialValues = {
-        fullname: '',
+        first_name: '', 
+        last_name: '',
         email: '',
-        DOB: null,
+        dob: null,
         password: '',
-        confirmPassword: '',
+        confirm_password: '',
         agreeToTerms: false,
         agreeToAge: false,
         agreeToUpdate: false,
     };
 
+    const postRequest = usePostRequest(); 
+
+    const { mutate, isLoading } = postRequest(
+        'https://api.balldraft.com/api/v1/auth/register/',
+        (response) => {
+            console.log('Success:', response);
+            // Handle success, maybe show a success message or redirect
+        },
+        (error) => {
+            console.error('Error:', error);
+            // Handle error, maybe show an error message
+        }
+    );
+
     const onSubmit = (values) => {
-        console.log(values);
+        // Format the date before submitting
+        const formattedValues = {
+            ...values,
+            dob: values.dob ? dayjs(values.dob).format('YYYY-MM-DD') : null,
+        };
+        console.log(formattedValues);
+        mutate(formattedValues);
         // Handle form submission
     };
 
     return (
-
         <AuthLayout>
-            {/* <Loader /> */}
-            {/* <Formik
+            {isLoading && <Loader />}
+            <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={onSubmit}
@@ -143,9 +164,17 @@ const Page = () => {
                             <p>Please provide the following details</p>
                         </div>
                         <Field
-                            name="fullname"
+                            name="first_name"
                             component={MuiFormikField}
-                            label="Full Name"
+                            label="First Name"
+                            variant="outlined"
+                            margin="normal"
+                            icon={<PersonIcon />}
+                        />
+                        <Field
+                            name="last_name"
+                            component={MuiFormikField}
+                            label="Last Name"
                             variant="outlined"
                             margin="normal"
                             icon={<PersonIcon />}
@@ -159,7 +188,7 @@ const Page = () => {
                             icon={<EmailIcon />}
                         />
                         <MuiFormikDatePicker
-                            name="DOB"
+                            name="dob"
                             label="Date of Birth"
                         />
                         <Field
@@ -172,7 +201,7 @@ const Page = () => {
                             icon={<LockIcon />}
                         />
                         <Field
-                            name="confirmPassword"
+                            name="confirm_password"
                             component={MuiFormikField}
                             label="Confirm Password"
                             type="password"
@@ -189,12 +218,11 @@ const Page = () => {
                             label="I agree that I am 18+ years old. I acknowledge that I am of age to navigate this account."
                         />
                         <MuiFormikCheckbox
-
                             name="agreeToUpdate"
-                            label="I agree to receive important updates, exclusive promotions and personalized notifications via the provided email address johndoe@gmail.com"
+                            label="I agree to receive important updates, exclusive promotions and personalized notifications via the provided email address"
                         />
                         <br />
-                        <Button type="submit" className='bg-[#012C51] w-full text-white p-[1rem] hover:bg-[#4096FF] rounded-[30px]' disabled={isSubmitting}>
+                        <Button type="submit" className='bg-[#012C51] w-full text-white p-[1rem] hover:bg-[#4096FF] rounded-[30px]' disabled={isSubmitting || isLoading}>
                             Proceed <ArrowForwardIcon />
                         </Button>
                         <div className='flex gap-4 my-[1.5rem] items-center justify-center'>
@@ -202,7 +230,7 @@ const Page = () => {
                             or
                             <aside className='w-2/5 border-[1px] border-[black] h-[2px]'></aside>
                         </div>
-                        <button type="submit" className=' flex items-center justify-center text-[black] border-[2px] border-[#012C51] w-full text-white p-[0.7rem] bg-white hover:bg-white rounded-[30px]' disabled={isSubmitting}>
+                        <button type="button" className=' flex items-center justify-center text-[black] border-[2px] border-[#012C51] w-full text-white p-[0.7rem] bg-white hover:bg-white rounded-[30px]' disabled={isSubmitting || isLoading}>
                             Continue with <Image src={google} height={20} className='ml-[0.5rem]' alt="" />
                         </button>
 
@@ -216,8 +244,8 @@ const Page = () => {
                         </div>
                     </Form>
                 )}
-            </Formik> */}
-            <Success />
+            </Formik>
+            {/* <Success /> */}
             {/* <Verifyemail /> */}
         </AuthLayout>
     );

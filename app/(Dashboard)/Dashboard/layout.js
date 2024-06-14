@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import "../../globals.css";
 import Footer from "@/components/Footer";
 import DashboardNav from "@/components/DashboardNav";
+import { ReactQueryProvider } from "@/app/ReactQueryprovider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,16 +14,18 @@ export const metadata = {
 export default function RootLayout({ children }) {
 
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <div className="center-max-width">
-          <div className="content-container">
-            <DashboardNav />
-            {children}
-            <Footer />
+    <ReactQueryProvider>
+      <html lang="en">
+        <body className={inter.className}>
+          <div className="center-max-width">
+            <div className="content-container">
+              <DashboardNav />
+              {children}
+              <Footer />
+            </div>
           </div>
-        </div>
-      </body>
-    </html>
+        </body>
+      </html>
+    </ReactQueryProvider>
   );
 }
