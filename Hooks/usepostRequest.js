@@ -8,6 +8,7 @@ const usePostRequest = () => {
     const mutation = useMutation({
       mutationFn: async (data) => {
         const accessToken = sessionStorage.getItem("accessToken");
+
         const headers = {
           "Content-Type": "application/json",
         };
@@ -22,9 +23,13 @@ const usePostRequest = () => {
       onError,
     });
 
+    const { mutate, isPending, isSuccess, isError } = mutation;
+
     return {
-      mutate: mutation.mutate,
-      isLoading: mutation.isLoading,
+      mutate,
+      isPending,
+      isSuccess,
+      isError,
     };
   };
 };
