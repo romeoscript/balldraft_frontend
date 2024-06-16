@@ -19,7 +19,7 @@ const fetchPackages = async (url) => {
 };
 
 export const useFetchDataPlans = (apiUrl) => {
-  console.log(apiUrl, "omor");
+
 
   return useQuery({
     queryKey: ["packages"],

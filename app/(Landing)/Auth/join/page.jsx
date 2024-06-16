@@ -146,7 +146,7 @@ const Page = () => {
     },
     (error) => {
       console.error('Error:', error);
-      const errorMessage = error.response?.data?.email?.[0] || 'An error occurred. Please try again.';
+      const errorMessage = error.response?.data?.email?.[0]  || error?.response?.data.error;
       toast.error(errorMessage);
     }
   );
@@ -164,6 +164,7 @@ const Page = () => {
 
   return (
     <AuthLayout>
+        <Verifyemail />
       <Toaster />
       {isPending && <Loader />}
       {registrationComplete ? (
