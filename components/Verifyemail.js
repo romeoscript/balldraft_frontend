@@ -107,6 +107,7 @@ const Verifyemail = ({  registrationData }) => {
 
   return (
     <>
+    {resending && <Loader />} 
       {isSuccess ? (
         <Success />
       ) : (

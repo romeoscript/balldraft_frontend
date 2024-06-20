@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, {useEffect} from "react";
 import { Formik, Form, Field, useField } from "formik";
 import {
   TextField,
@@ -25,6 +25,7 @@ import google from "@/public/images/google.svg";
 import Image from "next/image";
 import usePostRequest from "@/Hooks/usepostRequest";
 import toast, { Toaster } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const MuiFormikCheckbox = ({ label, ...props }) => {
   const [field] = useField(props);
@@ -107,6 +108,15 @@ const MuiFormikDatePicker = ({ label, ...props }) => {
 };
 
 const Page = () => {
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const accessToken = sessionStorage.getItem("access_token");
+    if (accessToken) {
+      router.push("/Dashboard");
+    }
+  }, [router]);
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email("Invalid email address")
@@ -127,8 +137,9 @@ const Page = () => {
     `${url}login/`,
     (response) => {
       console.log("Success:", response);
+      const accessToken = response.data.access;
+      sessionStorage.setItem("access_token", accessToken);
       toast.success("login was successful!");
-      setRegistrationComplete(true); // Set registration complete to true on success
     },
     (error) => {
       console.error("Error:", error);
