@@ -14,7 +14,7 @@ const Verifyemail = ({ onOtpSubmit, registrationData }) => {
     `${url}verify-email/`,
     (response) => {
       onOtpSubmit(otp.join(""));
-      toast.success('Request was successful!');
+      toast.success('OTP verification was successful!');
       console.log("Email verified successfully:", response);
     },
     (error) => {

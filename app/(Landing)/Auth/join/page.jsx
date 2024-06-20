@@ -141,7 +141,7 @@ const Page = () => {
     `${url}register/`,
     (response) => {
       console.log('Success:', response);
-      toast.success('Request was successful!');
+      toast.success('Registration was successful!');
       setRegistrationComplete(true); // Set registration complete to true on success
     },
     (error) => {
