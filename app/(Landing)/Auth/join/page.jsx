@@ -109,6 +109,7 @@ const MuiFormikDatePicker = ({ label, ...props }) => {
 
 const Page = () => {
   const [registrationComplete, setRegistrationComplete] = useState(false);
+  const [registrationData, setRegistrationData] = useState(null);
 
   const validationSchema = Yup.object().shape({
     first_name: Yup.string().required('First name is required'),
@@ -142,7 +143,9 @@ const Page = () => {
     (response) => {
       console.log('Success:', response);
       toast.success('Registration was successful!');
-      setRegistrationComplete(true); // Set registration complete to true on success
+      setRegistrationComplete(true); 
+      setRegistrationData(response)
+      // Set registration complete to true on success
     },
     (error) => {
       console.error('Error:', error);
@@ -164,11 +167,10 @@ const Page = () => {
 
   return (
     <AuthLayout>
-        <Verifyemail />
       <Toaster />
       {isPending && <Loader />}
       {registrationComplete ? (
-        <Verifyemail />
+        <Verifyemail registrationData={registrationData} />
       ) : (
         <Formik
           initialValues={initialValues}
