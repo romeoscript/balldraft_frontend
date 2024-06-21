@@ -1,28 +1,30 @@
-// hooks/useFetchDataPlans.ts
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 const fetchPackages = async (url) => {
- let accessToken
+  let accessToken = null;
 
- if (typeof window !== "undefined") {
-  accessToken = sessionStorage.getItem("accessToken");
-}
-  if (!accessToken) {
-    throw new Error("Access token is not available");
+  if (typeof window !== "undefined") {
+    accessToken = sessionStorage.getItem("access_token");
   }
 
-  const response = await axios.get(url, {
-    headers: { Authorization: `Bearer ${accessToken}` },
-  });
-  return response.data.data;
+  const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
+  console.log(headers)
+  try {
+    const response = await axios.get(url, { headers });
+    console.log(response.data)
+    return response.data || [];
+
+  } catch (error) {
+    console.error("Error fetching packages:", error);
+    return [];
+  }
 };
 
 export const useFetchDataPlans = (apiUrl) => {
-
-
   return useQuery({
     queryKey: ["packages"],
     queryFn: () => fetchPackages(apiUrl),
+    initialData: [],
   });
 };

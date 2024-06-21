@@ -10,9 +10,9 @@ const page = () => {
         <section>
             <div className='flex gap-4 p-[1rem] justify-around bg-white'>
                 <Sider />
-                {/* <ProfileForm /> */}
+                <ProfileForm />
                 {/* <ChangeEmail /> */}
-                <Changepassword />
+                {/* <Changepassword /> */}
             </div>
         </section>
 
