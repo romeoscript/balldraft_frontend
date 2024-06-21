@@ -5,6 +5,7 @@ import ChangeEmail from '@/components/Accounts/Settings/ChangeEmail';
 import ChangePassword from '@/components/Accounts/Settings/ChangePassword';
 import ProfileForm from '@/components/Accounts/Settings/ProfileForm';
 import Sider from '@/components/Accounts/Settings/Sider';
+import Deactivate from '@/components/Accounts/Settings/Deactivate';
 
 const Page = () => {
     const [activeComponent, setActiveComponent] = useState('ProfileForm');
@@ -27,7 +28,7 @@ const Page = () => {
             case 'TwoFactorAuth':
                 return <div>2-Factor Authentication Component</div>;
             case 'DeactivateAccount':
-                return <div>Deactivate Account Component</div>;
+                return <Deactivate />;
             default:
                 return <ProfileForm />;
         }
