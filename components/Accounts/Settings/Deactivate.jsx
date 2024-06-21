@@ -160,7 +160,7 @@ const Deactivate = () => {
               >
                 <MenuItem value="Violation of terms">Violation of terms</MenuItem>
                 <MenuItem value="No reason provided">No reason provided</MenuItem>
-                <MenuItem value="ersonal reasons">ersonal reasons</MenuItem>
+                <MenuItem value="ersonal reasons">Personal reasons</MenuItem>
               </Field>
               <FormHelperText>
                 <ErrorMessage name="reason" />
