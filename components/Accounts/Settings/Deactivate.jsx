@@ -15,6 +15,7 @@ import {
   Select,
   InputLabel,
 } from "@mui/material";
+import { useRouter } from "next/navigation";
 import LockIcon from "@mui/icons-material/Lock";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -22,6 +23,7 @@ import styled from "@emotion/styled";
 import * as Yup from "yup";
 import { Toaster, toast } from "react-hot-toast";
 import usePostRequest from "@/Hooks/usepostRequest";
+import Loader from "@/components/Loader";
 
 const MuiFormikCheckbox = ({ label, ...props }) => {
   const [field] = useField(props);
@@ -91,15 +93,17 @@ const MuiFormikField = ({
 const DeactivateAccountSchema = Yup.object().shape({
   reason: Yup.string().required("Reason is required"),
   comment: Yup.string().required("Please provide additional details"),
-  password: Yup.string().required("Password is required"),
+  // password: Yup.string().required("Password is required"),
 });
 
 const Deactivate = () => {
+  const router = useRouter();
+
   const [showPassword, setShowPassword] = useState(false);
   const postRequest = usePostRequest();
   const url = process.env.NEXT_PUBLIC_API_URL;
   const { mutate, isPending, isSuccess, isError, error } = postRequest(
-    `${url}account/deactivate/`,
+    `${url}account/deactivate/`
   );
 
   const toggleShowPassword = () => {
@@ -117,11 +121,13 @@ const Deactivate = () => {
       {
         reason: values.reason,
         comment: values.comment,
-        password: values.password,
+        password: "values.password",
       },
       {
         onSuccess: () => {
           toast.success("Account deactivated successfully");
+          sessionStorage.clear();
+          router.push("/Auth/join");
           setSubmitting(false);
         },
         onError: (error) => {
@@ -136,6 +142,7 @@ const Deactivate = () => {
   return (
     <div className="p-6 rounded-lg w-full m-auto">
       <Toaster />
+      {isPending && <Loader />}
       <Formik
         initialValues={initialValues}
         validationSchema={DeactivateAccountSchema}
@@ -158,9 +165,13 @@ const Deactivate = () => {
                 label="Reason"
                 variant="outlined"
               >
-                <MenuItem value="Violation of terms">Violation of terms</MenuItem>
-                <MenuItem value="No reason provided">No reason provided</MenuItem>
-                <MenuItem value="ersonal reasons">Personal reasons</MenuItem>
+                <MenuItem value="Violation of terms">
+                  Violation of terms
+                </MenuItem>
+                <MenuItem value="No reason provided">
+                  No reason provided
+                </MenuItem>
+                <MenuItem value="Personal reasons">Personal reasons</MenuItem>
               </Field>
               <FormHelperText>
                 <ErrorMessage name="reason" />
@@ -182,6 +193,7 @@ const Deactivate = () => {
               type="password"
               variant="outlined"
               margin="normal"
+              hidden
               icon={<LockIcon />}
               showPassword={showPassword}
               toggleShowPassword={toggleShowPassword}
