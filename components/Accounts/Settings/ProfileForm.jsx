@@ -5,14 +5,17 @@ import MobileModal from "./MobileModal";
 import AddressModal from "./AddressModal";
 import { useFetchDataPlans } from "@/Hooks/useFetch";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 const ProfileForm = () => {
-  const apiUrl = "https://api.balldraft.com/api/v1/profile/"; // Replace with your actual API URL
+  const apiUrl = "https://api.balldraft.com/api/v1/profile"; // Replace with your actual API URL
   const { data, isLoading, error } = useFetchDataPlans(apiUrl);
   const [formData, setFormData] = useState({
     username: "",
+    email: "",
     address: "",
     mobile_number: "",
+    dob: "",
     bank: "",
     account_number: "",
     account_name: "",
@@ -24,7 +27,9 @@ const ProfileForm = () => {
     if (data) {
       setFormData({
         username: data.username || "",
+        email: data.email || "",
         address: data.address || "",
+        dob: data.dob || "",
         mobile_number: data.mobile_number || "",
         bank: data.bank || "",
         account_number: data.account_number || "",
@@ -32,7 +37,9 @@ const ProfileForm = () => {
       });
       setOriginalData({
         username: data.username || "",
+        email: data.email || "",
         address: data.address || "",
+        dob: data.dob || "",
         mobile_number: data.mobile_number || "",
         bank: data.bank || "",
         account_number: data.account_number || "",
@@ -57,7 +64,7 @@ const ProfileForm = () => {
   const handleUpdate = async (field) => {
     try {
       await axios.patch(
-        apiUrl,
+        `${apiUrl}/`,
         { [field]: formData[field] },
         {
           headers: {
@@ -66,14 +73,14 @@ const ProfileForm = () => {
           },
         }
       );
-      alert("Profile updated successfully");
+      toast.success("Profile updated successfully");
       setOriginalData({ ...originalData, [field]: formData[field] });
       const newChanges = { ...changes };
       delete newChanges[field];
       setChanges(newChanges);
     } catch (error) {
       console.error("Error updating profile:", error);
-      alert("Failed to update profile");
+      toast.error("Failed to update profile");
     }
   };
 
@@ -87,6 +94,7 @@ const ProfileForm = () => {
 
   return (
     <div className="p-6 rounded-lg w-[70%]">
+      <Toaster />
       <div className="flex flex-col items-center gap-4 text-[#012C51] my-[2rem]">
         <img
           className=" w-20 h-20 rounded-full object-cover"
@@ -144,24 +152,24 @@ const ProfileForm = () => {
           <div className="flex items-center w-full border rounded-lg">
             <input
               type="date"
-              name="date_of_birth"
-              value={formData.date_of_birth}
+              name="dob"
+              value={formData.dob}
               onChange={handleChange}
               className="flex-grow p-2 bg-transparent focus:outline-none"
             />
             <button
               className={`p-2 text-white bg-[#012C51] rounded-full flex gap-2 ${
-                changes.date_of_birth ? "bg-blue-600" : "bg-gray-600"
+                changes.dob ? "bg-blue-600" : "bg-gray-600"
               }`}
-              onClick={() => handleUpdate("date_of_birth")}
-              disabled={!changes.date_of_birth}
+              onClick={() => handleUpdate("dob")}
+              disabled={!changes.dob}
             >
-              <Icon type="edit" /> {changes.date_of_birth ? "Save" : "Edit"}
+              <Icon type="edit" /> {changes.dob ? "Save" : "Edit"}
             </button>
           </div>
         </div>
         <div className="flex flex-col items-start">
-          <label className=" font-medium">Address Or Residence</label>
+          <label className=" font-medium">Address Of Residence</label>
           {formData.address ? (
             <div className="flex items-center w-full border rounded-lg">
               <input
@@ -192,15 +200,37 @@ const ProfileForm = () => {
           )}
         </div>
         <div className="flex flex-col items-start">
-          <label className="w-32 font-medium">Mobile Number</label>
-          <MobileModal
+          <label className=" font-medium">Mobile Number</label>
+          {formData.mobile_number ? (
+            <div className="flex items-center w-full border rounded-lg">
+              <input
+                type="text"
+                name="mobile_number"
+                value={formData.mobile_number}
+                onChange={handleChange}
+                className="flex-grow p-2 bg-transparent focus:outline-none"
+              />
+              <button
+                className={`p-2 text-white bg-[#012C51] rounded-full flex gap-2 ${
+                  changes.mobile_number ? "bg-blue-600" : "bg-gray-600"
+                }`}
+                onClick={() => handleUpdate("mobile_number")}
+                disabled={!changes.mobile_number}
+              >
+                <Icon type="edit" /> {changes.mobile_number ? "Save" : "Edit"}
+              </button>
+            </div>
+          ) : (
+            <MobileModal
             mobile_number={formData.mobile_number}
             onUpdate={(value) =>
               handleChange({ target: { name: "mobile_number", value } })
             }
             onSave={() => handleUpdate("mobile_number")}
           />
+          )}
         </div>
+       
       </div>
     </div>
   );

@@ -2,15 +2,17 @@
 import React, { useState } from "react";
 import { Input, Checkbox, Button } from "antd";
 
-const MobileModal = ({ mobile_number, onUpdate }) => {
+const MobileModal = ({ mobile_number, onUpdate, onSave }) => {
   const [mobileNumber, setMobileNumber] = useState(mobile_number);
 
   const handleChange = (e) => {
+    console.log(e.target.value, 'mine')
     setMobileNumber(e.target.value);
   };
 
   const handleSave = () => {
     onUpdate(mobileNumber);
+    onSave();
     document.getElementById("my_modal_4").close();
   };
 
