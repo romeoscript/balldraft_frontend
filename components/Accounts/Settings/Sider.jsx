@@ -8,35 +8,35 @@ const Sider = ({ setActiveComponent, activeComponent }) => {
     };
 
     return (
-        <div className='border-r-[1px] border-gray p-[1rem]'>
+        <div className='border-r-[1px] w-[20%] border-gray p-[1rem]'>
             <div className='flex flex-col gap-20 justify-between'>
                 <ul className='text-sm'>
                     <li
-                        className={`flex items-center gap-3 text-[#012C51] py-[0.5rem] hover:text-white hover:bg-[#012c51] rounded-md ${activeComponent === 'ProfileForm' ? 'bg-[#012c51] text-white' : ''}`}
+                        className={`cursor-pointer flex items-center gap-3 text-[#012C51] py-[0.5rem] hover:text-white hover:bg-[#012c51] rounded-md ${activeComponent === 'ProfileForm' ? 'bg-[#012c51] text-white' : ''}`}
                         onClick={() => handleClick('ProfileForm')}
                     >
                         <Icon type="profile" /> Profile
                     </li>
                     <li
-                        className={`flex items-center gap-3 text-[#012C51] py-[0.5rem] hover:text-white hover:bg-[#012c51] rounded-md ${activeComponent === 'ChangeEmail' ? 'bg-[#012c51] text-white' : ''}`}
+                        className={`cursor-pointer flex items-center gap-3 text-[#012C51] py-[0.5rem] hover:text-white hover:bg-[#012c51] rounded-md ${activeComponent === 'ChangeEmail' ? 'bg-[#012c51] text-white' : ''}`}
                         onClick={() => handleClick('ChangeEmail')}
                     >
                         <Icon type="emailChange" /> Change Email
                     </li>
                     <li
-                        className={`flex items-center gap-3 text-[#012C51] py-[0.5rem] hover:text-white hover:bg-[#012c51] rounded-md ${activeComponent === 'ChangePassword' ? 'bg-[#012c51] text-white' : ''}`}
+                        className={`cursor-pointer flex items-center gap-3 text-[#012C51] py-[0.5rem] hover:text-white hover:bg-[#012c51] rounded-md ${activeComponent === 'ChangePassword' ? 'bg-[#012c51] text-white' : ''}`}
                         onClick={() => handleClick('ChangePassword')}
                     >
                         <Icon type="passwordChange" /> Change Password
                     </li>
                     <li
-                        className={`flex items-center gap-3 text-[#012C51] py-[0.5rem] hover:text-white hover:bg-[#012c51] rounded-md ${activeComponent === 'TwoFactorAuth' ? 'bg-[#012c51] text-white' : ''}`}
+                        className={`cursor-pointer flex items-center gap-3 text-[#012C51] py-[0.5rem] hover:text-white hover:bg-[#012c51] rounded-md ${activeComponent === 'TwoFactorAuth' ? 'bg-[#012c51] text-white' : ''}`}
                         onClick={() => handleClick('TwoFactorAuth')}
                     >
                         <Icon type="twofactor" /> 2-Factor Authentication
                     </li>
                     <li
-                        className={`flex items-center gap-3 text-[#FF0000] py-[0.5rem] hover:text-white hover:bg-[#012c51] rounded-md ${activeComponent === 'DeactivateAccount' ? 'bg-[#012c51] text-white' : ''}`}
+                        className={`cursor-pointer flex items-center gap-3 text-[#FF0000] py-[0.5rem] hover:text-white hover:bg-[#012c51] rounded-md ${activeComponent === 'DeactivateAccount' ? 'bg-[#012c51] text-white' : ''}`}
                         onClick={() => handleClick('DeactivateAccount')}
                     >
                         <Icon type="deactivate" /> Deactivate Account

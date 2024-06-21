@@ -35,9 +35,12 @@ const Page = () => {
 
     return (
         <section>
-            <div className='flex gap-4 p-[1rem] justify-around bg-white'>
+            <div className='flex gap-4 p-[1rem] min-h-screen justify-between bg-white'>
                 <Sider setActiveComponent={setActiveComponent} activeComponent={activeComponent} />
-                {renderComponent()}
+
+                <div className='w-4/5'>
+                    {renderComponent()}
+                </div>
             </div>
         </section>
     );

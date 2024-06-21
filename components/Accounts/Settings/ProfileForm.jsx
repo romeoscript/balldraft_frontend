@@ -6,9 +6,10 @@ import AddressModal from "./AddressModal";
 import { useFetchDataPlans } from "@/Hooks/useFetch";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import Loader from "@/components/Loader";
 
 const ProfileForm = () => {
-  const apiUrl = "https://api.balldraft.com/api/v1/profile"; // Replace with your actual API URL
+  const apiUrl = "https://api.balldraft.com/api/v1/profile"; 
   const { data, isLoading, error } = useFetchDataPlans(apiUrl);
   const [formData, setFormData] = useState({
     username: "",
@@ -85,7 +86,7 @@ const ProfileForm = () => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   if (error) {
@@ -93,7 +94,7 @@ const ProfileForm = () => {
   }
 
   return (
-    <div className="p-6 rounded-lg w-[70%]">
+    <div className="p-6 rounded-lg m-auto w-full">
       <Toaster />
       <div className="flex flex-col items-center gap-4 text-[#012C51] my-[2rem]">
         <img
@@ -113,10 +114,10 @@ const ProfileForm = () => {
               name="username"
               value={formData.username}
               onChange={handleChange}
-              className="flex-grow p-2 bg-transparent focus:outline-none"
+              className="flex-grow p-3 bg-transparent focus:outline-none"
             />
             <button
-              className={`p-2 text-white bg-[#012C51] rounded-full flex gap-2 ${
+              className={`p-3 text-white bg-[#012C51] rounded-full flex gap-2 ${
                 changes.username ? "bg-blue-600" : "bg-gray-600"
               }`}
               onClick={() => handleUpdate("username")}
@@ -134,7 +135,7 @@ const ProfileForm = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="flex-grow p-2 bg-transparent focus:outline-none"
+              className="flex-grow p-3 bg-transparent focus:outline-none"
             />
             <button
               className={`p-2 text-white bg-[#012C51] rounded-full flex gap-2 ${
@@ -155,7 +156,7 @@ const ProfileForm = () => {
               name="dob"
               value={formData.dob}
               onChange={handleChange}
-              className="flex-grow p-2 bg-transparent focus:outline-none"
+              className="flex-grow p-3 bg-transparent focus:outline-none"
             />
             <button
               className={`p-2 text-white bg-[#012C51] rounded-full flex gap-2 ${
@@ -177,7 +178,7 @@ const ProfileForm = () => {
                 name="address"
                 value={formData.address}
                 onChange={handleChange}
-                className="flex-grow p-2 bg-transparent focus:outline-none"
+                className="flex-grow p-3 bg-transparent focus:outline-none"
               />
               <button
                 className={`p-2 text-white bg-[#012C51] rounded-full flex gap-2 ${
@@ -208,7 +209,7 @@ const ProfileForm = () => {
                 name="mobile_number"
                 value={formData.mobile_number}
                 onChange={handleChange}
-                className="flex-grow p-2 bg-transparent focus:outline-none"
+                className="flex-grow p-3 bg-transparent focus:outline-none"
               />
               <button
                 className={`p-2 text-white bg-[#012C51] rounded-full flex gap-2 ${
@@ -222,15 +223,14 @@ const ProfileForm = () => {
             </div>
           ) : (
             <MobileModal
-            mobile_number={formData.mobile_number}
-            onUpdate={(value) =>
-              handleChange({ target: { name: "mobile_number", value } })
-            }
-            onSave={() => handleUpdate("mobile_number")}
-          />
+              mobile_number={formData.mobile_number}
+              onUpdate={(value) =>
+                handleChange({ target: { name: "mobile_number", value } })
+              }
+              onSave={() => handleUpdate("mobile_number")}
+            />
           )}
         </div>
-       
       </div>
     </div>
   );
