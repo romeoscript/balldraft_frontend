@@ -107,7 +107,7 @@ const ProfileForm = () => {
 
       <div className="space-y-4 text-black">
         <div className="flex flex-col items-start">
-          <label className="w- font-medium">Full Name:</label>
+          <label className="w- font-medium">User Name:</label>
           <div className="flex items-center w-full border rounded-lg">
             <input
               type="text"

@@ -12,19 +12,18 @@ const MobileModal = ({ mobile_number, onUpdate, onSave }) => {
 
   const handleSave = () => {
     onUpdate(mobileNumber);
-    onSave();
-    document.getElementById("my_modal_4").close();
+    document.getElementById("my_modal_5").close();
   };
 
   return (
     <div className="w-full">
       <div
-        onClick={() => document.getElementById("my_modal_4").showModal()}
+        onClick={() => document.getElementById("my_modal_5").showModal()}
         className="flex items-center w-full border rounded-full cursor-pointer bg-[#fff] p-[0.7rem] justify-center"
       >
         + Add Mobile number
       </div>
-      <dialog id="my_modal_4" className="modal">
+      <dialog id="my_modal_5" className="modal">
         <div className="modal-box bg-white">
           <form method="dialog">
             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
@@ -59,3 +58,5 @@ const MobileModal = ({ mobile_number, onUpdate, onSave }) => {
 };
 
 export default MobileModal;
+
+

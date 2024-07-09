@@ -1,15 +1,22 @@
+'use client'
 import React from 'react'
 import { IoMdMenu } from "react-icons/io";
 import logo from '@/public/images/logo.png';
 import sportseat from '@/public/images/sportseat.svg';
 import starcup from '@/public/images/starcup.svg';
+import { useFetchDataPlans } from '@/Hooks/useFetch';
 
 const DashboardNav = () => {
+    const apiUrl = "https://api.balldraft.com/api/v1/profile";
+    const { data, isLoading, error } = useFetchDataPlans(apiUrl);
+    console.log(data , isLoading, 'fuck')
+    const  firstname = data?.full_name?.split(' ')[0]
+
     return (
         <section>
             <div className='flex items-center justify-around text-white nav-bg'>
                 <aside>
-                    Welcome back, John Doe 🦆
+                    Welcome back, {firstname} 🦆
                 </aside>
 
                 <aside className='flex items-center gap-8'>
@@ -59,8 +66,9 @@ const DashboardNav = () => {
                                         <div className="w-10 rounded-full">
                                             <img alt="Tailwind CSS Navbar component" className='rounded-full' src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
                                         </div>
-                                        John Doe <br />
-                                        johndoe@gmaul.com
+                                        {data?.full_name} <br />
+                                        {/* johndoe@gmaul.com */}
+                                        {data?.email}
                                     </summary>
                                     <ul className="p-2 bg-base-100 rounded-t-none">
                                         <li><a>Link 1</a></li>
