@@ -1,9 +1,10 @@
 "use client"
-import React from 'react'
-import heroimg from '@/public/images/heroimg.svg';
+import React, { useEffect } from 'react'
+import heroimg from '@/public/images/heroImg.svg';
 import jean from '@/public/images/jean.svg';
 import { useSpring, animated } from 'react-spring';
 import arrows from '@/public/images/arrows.svg';
+import { useRouter } from 'next/navigation';
 
 const ArrowAnimation = ({ delay }) => {
     const style = useSpring({
@@ -22,8 +23,8 @@ const ArrowAnimation = ({ delay }) => {
 };
 
 
-
 const Hero = () => {
+    const router = useRouter();
 
     return (
         <div className='h-[90vh] bg-background-linear relative mt-[80px] md:flex items-center p-[1rem]' >
@@ -38,7 +39,7 @@ const Hero = () => {
                 </p>
 
                 <div className='flex items-center '>
-                    <button className='bg-[#012C51] text-black bg-white px-[3.5rem] block py-[0.7rem] my-[2rem] rounded-[30px] p-3 cursor-pointer relative z-100 mr-[1rem]'>Get Started</button>
+                    <button className='bg-[#012C51] text-black bg-white px-[3.5rem] block py-[0.7rem] my-[2rem] rounded-[30px] p-3 cursor-pointer relative z-100 mr-[1rem]' onClick={() => router.push('/Auth/login')}>Get Started</button>
                     <ArrowAnimation delay={0} />
                 </div>
             </div>

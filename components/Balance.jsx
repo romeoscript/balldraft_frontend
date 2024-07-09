@@ -5,8 +5,20 @@ import map from "@/public/images/map.svg";
 import system from "@/public/images/system.svg";
 import { usePathname } from 'next/navigation';
 import Icon from '@/Reusable/Icons/Icons'
+import { useFetchDataPlans } from '@/Hooks/useFetch';
 
 const Balance = () => {
+    const apiUrl = "https://api.balldraft.com/api/v1/profile"
+    const { data: userProfile } = useFetchDataPlans(apiUrl);
+
+    console.log(userProfile);
+
+    function maskAccountNumber(accountNumber) {
+        var suffix = accountNumber?.slice(-4);
+        var maskedString = '**** ' + suffix;
+        return maskedString;
+    }
+
     const data = [
         {
             id: 1,
@@ -42,7 +54,7 @@ const Balance = () => {
                     <p> Total Balance</p>
                 </aside>
                 <aside className='flex justify-between p-[1rem]  text-white cursor-pointer'>
-                    <p className='text-2xl text-black font-bold'>$100.00 USD</p>
+                    <p className='text-2xl text-black font-bold'>${userProfile?.account_balance || "0"}.00 USD</p>
                     {isAccount ?
                         <aside className='flex items-center gap-8'>
                             <div >
@@ -82,7 +94,7 @@ const Balance = () => {
                     </div>
                     <div>
                         <p>Payment Method</p>
-                        <p className='text-xl font-bold mt-[1rem]'>**** 0733</p>
+                        <p className='text-xl font-bold mt-[1rem]'>{maskAccountNumber(userProfile?.account_number)}</p>
                     </div>
                 </aside>
             </figure>

@@ -26,6 +26,7 @@ import Image from "next/image";
 import usePostRequest from "@/Hooks/usepostRequest";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const MuiFormikCheckbox = ({ label, ...props }) => {
   const [field] = useField(props);
@@ -111,12 +112,6 @@ const Page = () => {
 
   const router = useRouter();
 
-  useEffect(() => {
-    const accessToken = sessionStorage.getItem("access_token");
-    if (accessToken) {
-      router.push("/Dashboard");
-    }
-  }, [router]);
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email("Invalid email address")
@@ -153,6 +148,13 @@ const Page = () => {
     mutate(values);
     // Handle form submission
   };
+
+   useEffect(() => {
+    const accessToken = sessionStorage.getItem("access_token");
+    if (accessToken) {
+      router.push("/Dashboard");
+    }
+  }, [isSuccess, router]);
 
   return (
     <AuthLayout>
@@ -214,9 +216,9 @@ const Page = () => {
             <div className="mb-[2rem]">
               <p className="text-center mt-[1rem]">
                 Yet to Create an account?{" "}
-                <a href="#" className="text-[#012C51] hover:underline">
+                <Link href="/Auth/join" className="text-[#012C51] hover:underline">
                   Sign up
-                </a>
+                </Link>
               </p>
             </div>
           </Form>
