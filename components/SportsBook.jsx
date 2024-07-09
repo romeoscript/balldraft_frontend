@@ -24,13 +24,13 @@ const SportsBook = () => {
   };
   return (
     <section className='p-[1rem]'>
-      <div className="flex gap-4 p-[1rem] my-[1rem] border-b-[2px]   ">
+      <div className="flex lg:gap-4 gap-2 p-[1rem] my-[1rem] border-b-[2px]   ">
         <button className={getButtonClass('all')} onClick={() => setFilter('all')}>All</button>
         <button className={getButtonClass('EPL')} onClick={() => setFilter('EPL')}> EPL</button>
         <button className={getButtonClass('NBA')} onClick={() => setFilter('NBA')}>NBA</button>
         <button className={getButtonClass('UFC')} onClick={() => setFilter('UFC')}>UFC</button>
       </div>
-      <div className='grid grid-cols-3 gap-4 p-[1rem] '>
+      <div className='grid lg:grid-cols-3 grid-cols-1 gap-4 lg:p-[1rem] '>
         {filteredSportsCards.map(card => (
           <SportsCard key={card.id} type={card.type} />
         ))}

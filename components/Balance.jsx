@@ -43,33 +43,42 @@ const Balance = () => {
     const isAccount = usePathname().includes('account')
     return (
 
-        <div className='flex gap-4 p-[1rem]'>
-            <figure className={` ${isAccount ? 'basis-[100%]' : 'basis-[40%]'} bg-[#F5F5F5] shadow-md text-black p-[1rem] rounded-[20px]`}>
-                <aside className='flex items-center gap-5 p-[1rem]'>
-                    <div className="avatar">
-                        <div className="w-4 rounded-full ring ">
-                            <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+        <div className='flex flex-col lg:flex-row gap-4 p-[1rem]'>
+            <figure className={`flex flex-col ${isAccount ? 'basis-[100%]' : 'basis-[40%]'} bg-[#F5F5F5] shadow-md text-black p-[1rem] rounded-[20px]`}>
+                <section className='flex  flex-col'>    
+                    <aside className='flex items-center gap-5 p-[1rem]'>
+                        <div className="avatar">
+                            <div className="w-4 rounded-full ring ">
+                                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                            </div>
                         </div>
-                    </div>
-                    <p> Total Balance</p>
-                </aside>
-                <aside className='flex justify-between p-[1rem]  text-white cursor-pointer'>
-                    <p className='text-2xl text-black font-bold'>${userProfile?.account_balance || "0"}.00 USD</p>
-                    {isAccount ?
-                        <aside className='flex items-center gap-8'>
-                            <div >
-                                <h2 className='text-[#012C51] text-xl'>Funds Deposited</h2>
-                                <p className='text-[#808080] text-2xl'>$75.000 USD</p>
-                            </div>
+                        <p> Total Balance</p>
+                    </aside>
+                    <aside className='flex justify-between p-[1rem]  text-white cursor-pointer'>
+                        <p className='text-2xl text-black font-bold'>${userProfile?.account_balance || "0"}.00 USD</p>
+                        {isAccount ?
+                            <aside className='flex items-center gap-8'>
+                                <div >
+                                    <h2 className='text-[#012C51] text-xl'>Funds Deposited</h2>
+                                    <p className='text-[#808080] text-2xl'>$75.000 USD</p>
+                                </div>
+                                <div>
+                                    <h2 className='text-[#012C51] text-xl'>Rewards Earned</h2>
+                                    <p className='text-[#808080] text-2xl'>$25.000 USD</p>
+                                </div>
+                            </aside> : 
                             <div>
-                                <h2 className='text-[#012C51] text-xl'>Rewards Earned</h2>
-                                <p className='text-[#808080] text-2xl'>$25.000 USD</p>
+                                <div className='bg-[#012C51] p-5 lg:p-[1rem] lg:px-[2rem] rounded-full flex gap-2'>
+                                    <span className='flex'>
+                                        <Icon type="topup" /> 
+                                        <span className='hidden lg:flex'>Top up</span>
+                                    </span>
+                                </div>
+                                <span className='font-medium lg:hidden flex text-[#012C51]'>Top up</span>
                             </div>
-                        </aside> : <div className='bg-[#012C51] p-[1rem] px-[2rem] rounded-full flex gap-2'>
-                                <Icon type="topup" /> Top up
-                            </div>}
-
-                </aside>
+                            }
+                    </aside>
+                </section>
                 <aside className='flex gap-4  py-[1rem]'>
                     {isAccount && <div className='flex'>
                         <aside className='flex justify-between p-[1rem]  text-white cursor-pointer'>
@@ -102,7 +111,7 @@ const Balance = () => {
                 <figure className='flex items-center justify-around basis-[60%]'>
                     {data.map((item) => (
                         <div key={item.id} className=' text-black p-[1rem] '>
-                            <aside className=' p-[1rem]'>
+                            <aside className=' lg:p-[1rem] flex flex-col justify-center'>
                                 <img src={item.image.src} />
                                 <p className='text-sm text-gray-500'> {item.title}</p>
                                 <p className='font-bold '>{item.points}</p>

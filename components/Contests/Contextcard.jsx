@@ -17,7 +17,7 @@ const Contextcard = ({ type = 'NBA', title }) => {
 
     return (
         <div className='p-[1rem]'>
-            <div className={`flex items-start justify-between text-gray-500 p-[1rem] bg-[#F9F9F9] shadow-md rounded-[10px] border-b-[5px]`} style={{ borderColor }}>
+            <div className={`lg:flex hidden items-start justify-between text-gray-500 p-[1rem] bg-[#F9F9F9] shadow-md rounded-[10px] border-b-[5px]`} style={{ borderColor }}>
                 {!pathname && <aside className='flex items-center gap-4'>
                     <img src={nbaball.src} alt="" />
                     <div>
@@ -44,6 +44,29 @@ const Contextcard = ({ type = 'NBA', title }) => {
                     </button>
                 </aside>
             </div>
+                <div className='flex items-start justify-between lg:hidden text-gray-500 p-[1rem] bg-[#F9F9F9] shadow-md rounded-[10px] border-b-[5px]' style={{ borderColor }}>
+                    <aside className='flex flex-col items-start gap-2'>
+                        <h2 className='font-medium text-sm text-black'>{title} Beginner Double Up ($1)</h2>
+                        <div className='flex items-center'>
+                            <img src={nbaball.src} alt="" className='w-16 h-16'/>
+                            <div>
+                                <h2 className='font-bold text-2xl text-black'>{title}</h2> {/* Use the 'title' prop dynamically */}
+                                <p className='text-lg'>Single Game</p>
+                            </div>
+                        </div>
+                        <h2 className='font-bold text-lg text-black'>619 Of 1.2K Entries</h2>
+                    </aside>
+                <aside className='flex flex-col items-end justify-between gap-2' style={{ borderColor }}>
+                    <aside className='flex items-center gap-2'>
+                        <h2 className='font-bold text-xl text-[#012C51]'>$50,000</h2>
+                        <span>Guranteed In Prize</span>
+                    </aside>
+                        <button className='bg-[#012C51] p-[1.4rem] rounded-full text-white'>
+                            Enter contest for $1
+                        </button>
+                        <span>8.00 PM</span>
+                </aside>
+                </div>
         </div>
     );
 };

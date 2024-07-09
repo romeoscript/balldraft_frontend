@@ -15,12 +15,12 @@ const DashboardNav = () => {
     return (
         <section>
             <div className='flex items-center justify-around text-white nav-bg'>
-                <aside>
+                <aside className='text-xs lg:text-lg'>
                     Welcome back, {firstname} 🦆
                 </aside>
 
                 <aside className='flex items-center gap-8'>
-                    <p className='flex items-center gap-3'> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <p className='lg:flex items-center gap-3 hidden'> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_153_13802)">
                             <path d="M3 9C3 8.73478 3.10536 8.48043 3.29289 8.29289C3.48043 8.10536 3.73478 8 4 8H20C20.2652 8 20.5196 8.10536 20.7071 8.29289C20.8946 8.48043 21 8.73478 21 9V11C21 11.2652 20.8946 11.5196 20.7071 11.7071C20.5196 11.8946 20.2652 12 20 12H4C3.73478 12 3.48043 11.8946 3.29289 11.7071C3.10536 11.5196 3 11.2652 3 11V9Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                             <path d="M12 8V21" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -36,7 +36,7 @@ const DashboardNav = () => {
                     </svg>
                         Rewards
                     </p>
-                    <p className='flex items-center gap-3'>
+                    <p className='lg:flex items-center gap-3 hidden'>
                         <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M16.9714 6.58545C17.5018 6.58553 18.0103 6.79624 18.3853 7.17124C18.7603 7.54624 18.9711 8.05482 18.9711 8.58515C20.1198 9.12811 21.099 9.97344 21.8038 11.0305C22.5086 12.0876 22.9124 13.3166 22.9719 14.5857L22.9705 17.5852C23.0458 18.207 23.266 18.8024 23.6135 19.3235C23.9609 19.8447 24.4259 20.2769 24.9709 20.5855L8.97264 20.5862C9.51747 20.2776 9.98224 19.8454 10.3296 19.3244C10.6769 18.8035 10.897 18.2082 10.9723 17.5866L10.9709 14.5857C11.0305 13.3166 11.4343 12.0876 12.1391 11.0305C12.8439 9.97343 13.8231 9.12811 14.9717 8.58515C14.9718 8.05482 15.1825 7.54624 15.5575 7.17124C15.9325 6.79624 16.4411 6.58553 16.9714 6.58545Z" fill="white" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                             <path d="M13.9709 20.5855L13.9709 21.5853C13.9709 22.3811 14.287 23.1442 14.8497 23.7068C15.4123 24.2695 16.1754 24.5856 16.9712 24.5856C17.7669 24.5856 18.53 24.2695 19.0927 23.7068C19.6553 23.1442 19.9714 22.3811 19.9714 21.5853V20.5855" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -46,7 +46,7 @@ const DashboardNav = () => {
                         Notifications
 
                     </p>
-                    <p className='flex items-center gap-3'><svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <p className='lg:flex items-center gap-3 hidden'><svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_153_13812)">
                             <path d="M12.9414 2C18.4644 2 22.9414 6.477 22.9414 12C22.9435 14.6255 21.913 17.1464 20.0723 19.0186C18.2317 20.8908 15.7286 21.9641 13.1034 22.0066C10.4783 22.0491 7.94174 21.0576 6.0414 19.246C4.14106 17.4344 3.02939 14.9482 2.94641 12.324L2.94141 12L2.94541 11.72C3.09341 6.327 7.51141 2 12.9414 2ZM12.9414 15C12.6965 15 12.4601 15.09 12.277 15.2527C12.094 15.4155 11.9771 15.6397 11.9484 15.883L11.9414 16L11.9484 16.127C11.9773 16.3701 12.0944 16.5941 12.2774 16.7566C12.4604 16.9191 12.6966 17.0089 12.9414 17.0089C13.1862 17.0089 13.4224 16.9191 13.6054 16.7566C13.7885 16.5941 13.9055 16.3701 13.9344 16.127L13.9414 16.01L13.9344 15.883C13.9057 15.6397 13.7888 15.4155 13.6058 15.2527C13.4227 15.09 13.1863 15 12.9414 15ZM14.3094 8.327C13.7108 8.02097 13.0263 7.92635 12.3671 8.05851C11.7079 8.19067 11.1128 8.54186 10.6784 9.055C10.5128 9.249 10.4276 9.49896 10.4402 9.75373C10.4528 10.0085 10.5623 10.2488 10.7463 10.4255C10.9302 10.6022 11.1748 10.7019 11.4299 10.7042C11.6849 10.7066 11.9312 10.6113 12.1184 10.438L12.2894 10.258C12.4369 10.1226 12.6224 10.0356 12.8209 10.0088C13.0193 9.98197 13.2212 10.0166 13.3994 10.108C13.5915 10.2052 13.7471 10.3618 13.843 10.5545C13.939 10.7473 13.9702 10.9658 13.932 11.1777C13.8938 11.3895 13.7882 11.5834 13.631 11.7305C13.4738 11.8776 13.2733 11.97 13.0594 11.994L12.8274 12.006C12.5731 12.034 12.3391 12.1584 12.1737 12.3536C12.0084 12.5489 11.9241 12.8001 11.9383 13.0556C11.9525 13.3111 12.0642 13.5514 12.2502 13.7271C12.4362 13.9027 12.6825 14.0004 12.9384 14C13.613 14.002 14.2686 13.7766 14.7994 13.3601C15.3301 12.9437 15.705 12.3605 15.8635 11.7047C16.022 11.049 15.9548 10.359 15.6728 9.74609C15.3908 9.13322 14.9105 8.63328 14.3094 8.327Z" fill="white" />
                         </g>
@@ -62,13 +62,20 @@ const DashboardNav = () => {
                             <li>
                                 <details>
 
-                                    <summary>
+                                    <summary className='flex'>
                                         <div className="w-10 rounded-full">
                                             <img alt="Tailwind CSS Navbar component" className='rounded-full' src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
                                         </div>
-                                        {data?.full_name} <br />
+                                        <div>
+                                            <span className='font-bold text-sm'>
+                                                {data?.full_name}
+                                            </span>
+                                            <br />
+                                            <span className='font-bold text-xs'>
+                                                {data?.email}
+                                            </span>
+                                        </div>
                                         {/* johndoe@gmaul.com */}
-                                        {data?.email}
                                     </summary>
                                     <ul className="p-2 bg-base-100 rounded-t-none">
                                         <li><a>Link 1</a></li>
@@ -83,23 +90,27 @@ const DashboardNav = () => {
             </div>
             <div className='py-[1rem]'>
                 <aside className='flex items-center justify-around'>
-                    <IoMdMenu className='text-5xl text-black' />
+                    <IoMdMenu className='text-5xl text-black hidden lg:flex' />
+                    <div className='bg-[#F2F2F2] rounded-full p-2 lg:hidden flex'>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70"><path fillRule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clipRule="evenodd" /></svg>
+                    </div>
                     <div className='flex'>
-                        <figure className='bg-[#012C51] rounded-full text-white flex gap-4 p-[1rem]'>
+                        <figure className='bg-[#012C51] rounded-full text-white lg:flex gap-4 p-[1rem] hidden'>
                             <img src={starcup.src} alt="" />
                             Daily Fantasy
                         </figure>
-                        <figure className='flex gap-4 text-black p-[1rem]'>
+                        <figure className='lg:flex gap-4 text-black p-[1rem] hidden'>
                             <img src={sportseat.src} alt="" />
                            Sports
                         </figure>
                     </div>
-                    <img src={logo.src} className='w-[150px]' alt="" />
+                    <img src={logo.src} className='lg:w-[150px] w-[80px]' alt="" />
 
-                    <label className="input input-bordered flex items-center gap-2 bg-white rounded-full">
+                    <label className="input input-bordered lg:flex items-center gap-2 bg-white rounded-full hidden">
                         <input type="text" className="grow rounded-full" placeholder="Search for games" />
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70"><path fillRule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clipRule="evenodd" /></svg>
                     </label>
+                    <IoMdMenu className='text-5xl text-gray-500 border rounded-2 lg:hidden flex' />
                 </aside>
             </div>
         </section>
