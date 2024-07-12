@@ -26,7 +26,7 @@ const SportsBook = () => {
     <section className='p-[1rem]'>
       <div className="flex lg:gap-4 gap-2 p-[1rem] my-[1rem] border-b-[2px]   ">
         <button className={getButtonClass('all')} onClick={() => setFilter('all')}>All</button>
-        <button className={getButtonClass('EPL')} onClick={() => setFilter('EPL')}> EPL</button>
+        <button className={getButtonClass('EPL')} onClick={() => { setFilter('EPL'); r }}> EPL</button>
         <button className={getButtonClass('NBA')} onClick={() => setFilter('NBA')}>NBA</button>
         <button className={getButtonClass('UFC')} onClick={() => setFilter('UFC')}>UFC</button>
       </div>

@@ -1,7 +1,9 @@
+'use client'
+
 import React from 'react';
 import nbaball from '../../public/images/nbaball.svg';
 import eplball from '../../public/images/eplball.svg';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 const typeStyles = {
     NBA: { image: nbaball.src, borderColor: '#FF6D00', bgColor: '#012C51' }, // Example values
@@ -13,6 +15,7 @@ const typeStyles = {
 const Contextcard = ({ type = 'NBA', title }) => {
     const { borderColor } = typeStyles[type] || typeStyles['NBA'];
     const pathname = usePathname().includes('game');
+    const router = useRouter();
 
 
     return (
@@ -39,7 +42,7 @@ const Contextcard = ({ type = 'NBA', title }) => {
                         <p>Guranteed In Prize</p>
                     </aside>}
                 <aside>
-                    <button className='bg-[#012C51] px-[2rem] py-[0.6rem] rounded-full text-white'>
+                    <button className='bg-[#012C51] px-[2rem] py-[0.6rem] rounded-full text-white' onClick={() => router.push('/Dashboard/contest')}>
                         Enter contest for $1
                     </button>
                 </aside>
@@ -59,9 +62,9 @@ const Contextcard = ({ type = 'NBA', title }) => {
                 <aside className='flex flex-col items-end justify-between gap-2' style={{ borderColor }}>
                     <aside className='flex items-center gap-2'>
                         <h2 className='font-bold text-xl text-[#012C51]'>$50,000</h2>
-                        <span>Guranteed In Prize</span>
+                        <span>Guaranteed In Prize</span>
                     </aside>
-                        <button className='bg-[#012C51] p-[1.4rem] rounded-full text-white'>
+                        <button className='bg-[#012C51] p-[1.4rem] rounded-full text-white' onClick={() => router.push('Dashboard/contest')}>
                             Enter contest for $1
                         </button>
                         <span>8.00 PM</span>
