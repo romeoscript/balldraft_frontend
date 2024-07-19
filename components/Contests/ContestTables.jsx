@@ -352,7 +352,7 @@ function ContestTables() {
                         <aside className='basis-[49%]'>
                             <div className='bg-[#F9F9F9] rounded-md mb-[1rem] mt-[1rem]'>
                                 <h2 className='text-black text-lg'>Ball-Draft Platform</h2>
-                                <p className='flex gap-4 my-[0.5rem] text-sm text-gray-500'><span>2 days ago</span> <li className='list-disc'>Highlight</li></p>
+                                <p className='flex gap-4 my-[0.5rem] text-sm text-gray-500'><span>2 days ago</span> <li className='list-disc'>Highlight </li></p>
                                 <p className='text-[12px]'>Gabe Davis reeled in five of his nine targets for 26 yards and a touchdown during the 2023 regular session.
                                     Advice: Bell provided a serviceable backup veteran tight end for the Chiefs in 2023. But, he sat clearly behind Travis Kelce and Noag Gabe in the pecking order. Bulldozer’s contract expires following the season.</p>
                             </div>
