@@ -5,48 +5,16 @@ import GameCard from "@/Reusable/GameCard";
 import CircularProgressBar from "@/components/CircularProgressBar";
 import Players from "@/components/Players";
 import ContestTables from "@/components/Contests/ContestTables";
+import { useParams } from "next/navigation";
+import { useFetchDataPlans } from "@/Hooks/useFetch";
 
 const Page = () => {
   const [startIndex, setStartIndex] = useState(0);
   const [visibleCards, setVisibleCards] = useState(4); // Increased visible cards to 4
+  const  {id} = useParams();
+  const { data: cards } = useFetchDataPlans(apiUrl)
+  const apiUrl = `https://api.balldraft.com/get-fixture/${id}`;
 
-  const cards = [
-    {
-      homeTeam: "HOU",
-      awayTeam: "BAL",
-      homeScore: "43.5",
-      awayScore: "-9.5",
-      time: "Today, 8:30 PM",
-    },
-    {
-      homeTeam: "GB",
-      awayTeam: "SF",
-      homeScore: "50.3",
-      awayScore: "-9.5",
-      time: "Today, 8:36 PM",
-    },
-    {
-      homeTeam: "TB",
-      awayTeam: "DET",
-      homeScore: "48.5",
-      awayScore: "-6.5",
-      time: "Today, 8:30 PM",
-    },
-    {
-      homeTeam: "KC",
-      awayTeam: "BUF",
-      homeScore: "45.5",
-      awayScore: "-3",
-      time: "Today, 8:30 PM",
-    },
-    {
-      homeTeam: "GB",
-      awayTeam: "SF",
-      homeScore: "50.3",
-      awayScore: "-9.5",
-      time: "Today, 8:36 PM",
-    },
-  ];
 
   const handlePrevious = () => {
     if (startIndex > 0) {
@@ -68,16 +36,21 @@ const Page = () => {
             <span className="font-bold text-lg">NBA Friday Baller </span>
             <img src="/images/Sport.svg" alt="Sport Icon" />
           </div>
-          <div className="flex gap-10">
-            <button className="bg-[#FF6D00] rounded-full text-white px-8 py-3">
+          <div className="flex lg:gap-10">
+            <button className="bg-[#FF6D00] rounded-full text-white font-bold lg:px-8 px-18  text-xs py-3">
               $15,000 - $3K To 1st
             </button>
-            <button className="text-gray-700">8:30 PM | Today</button>
-            <button className="text-gray-700">Guaranteed Prize Pool</button>
-            <button className="text-gray-700">Multi-Entry (50 max)</button>
+            <button className="text-gray-700 text-[11px] lg:text-lg">8:30 PM | Today</button>
+            <button className="text-gray-700 hidden">Guaranteed Prize Pool</button>
+            <button className="text-gray-700 hidden">Multi-Entry (50 max)</button>
           </div>
         </div>
-        <CircularProgressBar />
+        <div className='lg:hidden'>
+          <CircularProgressBar size={10}/>
+        </div>
+        <div className='lg:flex hidden'>
+          <CircularProgressBar/>
+        </div>
       </div>
 
       <div className="flex gap-5 relative overflow-hidden  items-center ">
@@ -113,18 +86,18 @@ const Page = () => {
         </div>
 
         <div className="flex  transition-transform duration-300 gap-5 ease-in-out transform">
-          {cards
+          {/* {cards
             .slice(startIndex, startIndex + visibleCards)
-            .map((card, index) => (
+            .map((card, index) => ( */}
               <GameCard
-                key={index}
-                homeTeam={card.homeTeam}
-                awayTeam={card.awayTeam}
-                homeScore={card.homeScore}
-                awayScore={card.awayScore}
-                time={card.time}
+                key={cards.id}
+                homeTeam={cards.home}
+                awayTeam={cards.away}
+                // homeScore={card.homeScore}
+                // awayScore={card.awayScore}
+                // time={card.time}
               />
-            ))}
+            {/* )) */}
         </div>
 
         <div className="rounded-xl flex gap-2 items-center mb-10 p-5">
@@ -167,7 +140,7 @@ const Page = () => {
         </div>
       </div>
 
-       <ContestTables />
+       <ContestTables card={cards} />
     </div>
   );
 };

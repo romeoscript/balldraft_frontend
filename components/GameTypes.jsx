@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 
-export default function GameTypes({ categories, initialValues, labels, onChange }) {
-  const [value, setValue] = useState(initialValues || 50); // Initial value
+export default function GameTypes({ categories, initialValues, labels, onChange, filters }) {
+  const [value, setValue] = useState(initialValues || 50); 
+  // console.log(filters);
 
   const handleChange = (e) => {
     setValue(e.target.value);
-    if (onChange) onChange(e.target.value);
+    if (onChange) onChange(e);
   };
+
+  const handleSelected = (e) => {
+    if (onChange) onChange(e);
+  }
 
   const handleMinClick = (e) => {
     setValue(0);
@@ -28,7 +33,7 @@ export default function GameTypes({ categories, initialValues, labels, onChange 
             <p className="text-[#012C51] mb-3 font-semibold text-[1.2rem]">{category}</p>
             {labels[index].map((label, i) => (
               <div key={i} className="flex items-center gap-2">
-                <input type="radio" name={`${category}-${i}`} className="h-5 w-5" />
+                <input type="radio" name={`${category}`} className="h-5 w-5" onClick={handleSelected} value={label}/>
                 <label>{label}</label>
               </div>
             ))}

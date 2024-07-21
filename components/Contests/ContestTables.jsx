@@ -1,40 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Table, Avatar, Modal } from 'antd';
 import logo from '@/public/images/logo.png';
 
 
-const initialPlayers = [
-    { key: 1, name: 'Lionel Messi', position: 'RW', team: 'PSG', opp: 'MCI', salary: 12000, fppg: 35.6, SD: 8.2, nextGame: 'PSG vs MCI on May 20, 2024', image: 'https://via.placeholder.com/150' },
-    { key: 2, name: 'Cristiano Ronaldo', position: 'CF', team: 'MUN', opp: 'CHE', salary: 11000, fppg: 33.4, SD: 7.9, nextGame: 'MUN vs CHE on May 21, 2024', image: 'https://via.placeholder.com/150' },
-    { key: 3, name: 'Neymar Jr', position: 'LW', team: 'PSG', opp: 'MCI', salary: 10500, fppg: 30.1, SD: 7.0, nextGame: 'PSG vs MCI on May 20, 2024', image: 'https://via.placeholder.com/150' },
-    { key: 4, name: 'Kylian Mbappe', position: 'CF', team: 'PSG', opp: 'MCI', salary: 10800, fppg: 32.2, SD: 7.5, nextGame: 'PSG vs MCI on May 20, 2024', image: 'https://via.placeholder.com/150' },
-    { key: 5, name: 'Kevin De Bruyne', position: 'CAM', team: 'MCI', opp: 'PSG', salary: 10000, fppg: 28.3, SD: 6.8, nextGame: 'MCI vs PSG on May 20, 2024', image: 'https://via.placeholder.com/150' },
-    { key: 6, name: 'Robert Lewandowski', position: 'CF', team: 'BAR', opp: 'RMA', salary: 11500, fppg: 34.7, SD: 8.0, nextGame: 'BAR vs RMA on May 22, 2024', image: 'https://via.placeholder.com/150' },
-    { key: 7, name: 'Luka Modric', position: 'CM', team: 'RMA', opp: 'BAR', salary: 9200, fppg: 26.5, SD: 6.2, nextGame: 'RMA vs BAR on May 22, 2024', image: 'https://via.placeholder.com/150' },
-    { key: 8, name: 'Karim Benzema', position: 'CF', team: 'RMA', opp: 'BAR', salary: 11000, fppg: 33.1, SD: 7.6, nextGame: 'RMA vs BAR on May 22, 2024', image: 'https://via.placeholder.com/150' },
-    { key: 9, name: 'Erling Haaland', position: 'CF', team: 'MCI', opp: 'PSG', salary: 11800, fppg: 34.2, SD: 7.8, nextGame: 'MCI vs PSG on May 20, 2024', image: 'https://via.placeholder.com/150' },
-    { key: 10, name: 'Sergio Ramos', position: 'CB', team: 'PSG', opp: 'MCI', salary: 8500, fppg: 20.3, SD: 5.5, nextGame: 'PSG vs MCI on May 20, 2024', image: 'https://via.placeholder.com/150' },
-    { key: 11, name: 'Virgil van Dijk', position: 'CB', team: 'LIV', opp: 'MCI', salary: 8800, fppg: 21.1, SD: 5.7, nextGame: 'LIV vs MCI on May 21, 2024', image: 'https://via.placeholder.com/150' },
-    { key: 12, name: 'Mohamed Salah', position: 'RW', team: 'LIV', opp: 'MCI', salary: 11200, fppg: 31.8, SD: 7.3, nextGame: 'LIV vs MCI on May 21, 2024', image: 'https://via.placeholder.com/150' },
-    { key: 13, name: 'Sadio Mane', position: 'LW', team: 'BAY', opp: 'DOR', salary: 10900, fppg: 30.5, SD: 7.4, nextGame: 'BAY vs DOR on May 22, 2024', image: 'https://via.placeholder.com/150' },
-    { key: 14, name: 'Joshua Kimmich', position: 'CDM', team: 'BAY', opp: 'DOR', salary: 9400, fppg: 27.4, SD: 6.5, nextGame: 'BAY vs DOR on May 22, 2024', image: 'https://via.placeholder.com/150' },
-    { key: 15, name: 'Toni Kroos', position: 'CM', team: 'RMA', opp: 'BAR', salary: 9000, fppg: 25.6, SD: 6.0, nextGame: 'RMA vs BAR on May 22, 2024', image: 'https://via.placeholder.com/150' },
-    { key: 16, name: 'Alphonso Davies', position: 'LB', team: 'BAY', opp: 'DOR', salary: 8600, fppg: 22.2, SD: 5.8, nextGame: 'BAY vs DOR on May 22, 2024', image: 'https://via.placeholder.com/150' },
-    { key: 17, name: 'Trent Alexander-Arnold', position: 'RB', team: 'LIV', opp: 'MCI', salary: 8700, fppg: 22.7, SD: 5.9, nextGame: 'LIV vs MCI on May 21, 2024', image: 'https://via.placeholder.com/150' },
-    { key: 18, name: 'Raheem Sterling', position: 'LW', team: 'CHE', opp: 'MUN', salary: 10000, fppg: 29.0, SD: 6.9, nextGame: 'CHE vs MUN on May 23, 2024', image: 'https://via.placeholder.com/150' },
-    { key: 19, name: 'Jadon Sancho', position: 'RW', team: 'MUN', opp: 'CHE', salary: 9500, fppg: 27.0, SD: 6.7, nextGame: 'MUN vs CHE on May 23, 2024', image: 'https://via.placeholder.com/150' },
-    { key: 20, name: 'Phil Foden', position: 'CAM', team: 'MCI', opp: 'PSG', salary: 9300, fppg: 26.8, SD: 6.6, nextGame: 'MCI vs PSG on May 20, 2024', image: 'https://via.placeholder.com/150' },
-];
 
-function ContestTables() {
-    const [availablePlayers, setAvailablePlayers] = useState(initialPlayers);
+function ContestTables({ card }) {
+    const [availablePlayers, setAvailablePlayers] = useState([]);
     const [selectedPlayers, setSelectedPlayers] = useState([]);
     const [activeButton, setActiveButton] = useState("All");
     const [searchText, setSearchText] = useState("");
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [modalPlayer, setModalPlayer] = useState(null);
 
-    // Function to handle button clicks and filter players
+    const players = useMemo(() => {
+        const transformHomeTeam = card.home_team[0].players.map(player => ({
+            ...player,
+            team: card.home_team[0].team.name,
+        }));
+        const transformAwayTeam = card.away_team[0].players.map(player => ({
+            ...player,
+            team: card.away_team[0].team.name,
+        }));
+        return [...transformHomeTeam, ...transformAwayTeam]
+    }, [card.away_team, card.home_team])
+
+    useEffect(() => {
+        setAvailablePlayers(players);
+    }, [players])
+
+
     const handleButtonClick = (buttonName) => {
         setActiveButton(buttonName);
         filterPlayers(buttonName, searchText);
@@ -49,24 +43,25 @@ function ContestTables() {
 
     // Function to filter players based on position and search text
     const filterPlayers = (position, text) => {
-        let filteredPlayers = initialPlayers;
+        let filteredPlayers = players;
         if (position !== "All") {
             filteredPlayers = filteredPlayers.filter(player => player.position === position);
         }
         if (text) {
             filteredPlayers = filteredPlayers.filter(player => player.name.toLowerCase().includes(text.toLowerCase()));
         }
+        console.log(filteredPlayers);
         setAvailablePlayers(filteredPlayers);
     };
 
     const addPlayer = (player) => {
         setSelectedPlayers([...selectedPlayers, player]);
-        setAvailablePlayers(availablePlayers.filter(p => p.key !== player.key));
+        setAvailablePlayers(availablePlayers.filter(p => p.id !== player.id));
     };
 
     const removePlayer = (player) => {
         setAvailablePlayers([...availablePlayers, player]);
-        setSelectedPlayers(selectedPlayers.filter(p => p.key !== player.key));
+        setSelectedPlayers(selectedPlayers.filter(p => p.id !== player.id));
     };
 
     const showModal = (player) => {
@@ -96,10 +91,8 @@ function ContestTables() {
         },
         { title: 'POSITION', dataIndex: 'position', key: 'position' },
         { title: 'TEAM', dataIndex: 'team', key: 'team' },
-        { title: 'OPP', dataIndex: 'opp', key: 'opp' },
-        { title: 'SALARY', dataIndex: 'salary', key: 'salary' },
-        { title: 'FPPG', dataIndex: 'fppg', key: 'fppg' },
-        { title: 'SD', dataIndex: 'SD', key: 'SD' },
+        { title: 'AGE', dataIndex: 'age', key: 'age' },
+        { title: 'NUMBER', dataIndex: 'number', key: 'number' },
         {
             render: (text, record) => (
                 <button className='rounded-[20px] border-[1px] text-[#012C51] p-[0.5rem] border-[#012C51]' onClick={() => addPlayer(record)}>
@@ -122,7 +115,7 @@ function ContestTables() {
             ),
         },
         { title: 'POSITION', dataIndex: 'position', key: 'position' },
-        { title: 'FPPG', dataIndex: 'fppg', key: 'fppg' },
+        { title: 'TEAM', dataIndex: 'team', key: 'team' },
         {
             render: (text, record) => (
                 <button className='rounded-[20px] border-[1px] text-[red] p-[0.5rem] border-[red]' onClick={() => removePlayer(record)}>
@@ -143,58 +136,28 @@ function ContestTables() {
                         All
                     </button>
                     <button
-                        className={`px-[0.8rem] text-sm rounded-[20px] m-1 ${activeButton === "CF" ? "bg-gray-500 text-white" : "border-[2px]"}`}
-                        onClick={() => handleButtonClick("CF")}
+                        className={`px-[0.8rem] text-sm rounded-[20px] m-1 ${activeButton === "Goalkeeper" ? "bg-gray-500 text-white" : "border-[2px]"}`}
+                        onClick={() => handleButtonClick("Goalkeeper")}
                     >
-                        CF
+                        Goalkeeper
                     </button>
                     <button
-                        className={`px-[0.7rem] text-sm rounded-[20px] m-1 ${activeButton === "LW" ? "bg-gray-500 text-white" : "border-[2px]"}`}
-                        onClick={() => handleButtonClick("LW")}
+                        className={`px-[0.7rem] text-sm rounded-[20px] m-1 ${activeButton === "Defender" ? "bg-gray-500 text-white" : "border-[2px]"}`}
+                        onClick={() => handleButtonClick("Defender")}
                     >
-                        LW
+                        Defender
                     </button>
                     <button
-                        className={`px-[0.7rem] text-sm rounded-[20px] m-1 ${activeButton === "RW" ? "bg-gray-500 text-white" : "border-[2px]"}`}
-                        onClick={() => handleButtonClick("RW")}
+                        className={`px-[0.7rem] text-sm rounded-[20px] m-1 ${activeButton === "Midfielder" ? "bg-gray-500 text-white" : "border-[2px]"}`}
+                        onClick={() => handleButtonClick("Midfielder")}
                     >
-                        RW
+                        Midfielder
                     </button>
                     <button
-                        className={`px-[0.7rem] text-sm  rounded-[20px] m-1 ${activeButton === "CAM" ? "bg-gray-500 text-white" : "border-[2px]"}`}
-                        onClick={() => handleButtonClick("CAM")}
+                        className={`px-[0.7rem] text-sm  rounded-[20px] m-1 ${activeButton === "Attacker" ? "bg-gray-500 text-white" : "border-[2px]"}`}
+                        onClick={() => handleButtonClick("Attacker")}
                     >
-                        CAM
-                    </button>
-                    <button
-                        className={`px-[0.7rem] text-sm rounded-[20px] m-1 ${activeButton === "CM" ? "bg-gray-500 text-white" : "border-[2px]"}`}
-                        onClick={() => handleButtonClick("CM")}
-                    >
-                        CM
-                    </button>
-                    <button
-                        className={`px-[0.7rem] text-sm  rounded-[20px] m-1 ${activeButton === "CDM" ? "bg-gray-500 text-white" : "border-[2px]"}`}
-                        onClick={() => handleButtonClick("CDM")}
-                    >
-                        CDM
-                    </button>
-                    <button
-                        className={`px-[0.7rem] text-sm rounded-[20px] m-1 ${activeButton === "CB" ? "bg-gray-500 text-white" : "border-[2px]"}`}
-                        onClick={() => handleButtonClick("CB")}
-                    >
-                        CB
-                    </button>
-                    <button
-                        className={`px-[0.7rem] text-sm rounded-[20px] m-1 ${activeButton === "LB" ? "bg-gray-500 text-white" : "border-[2px]"}`}
-                        onClick={() => handleButtonClick("LB")}
-                    >
-                        LB
-                    </button>
-                    <button
-                        className={`px-[0.7rem] text-sm rounded-[20px] m-1 ${activeButton === "RB" ? "bg-gray-500 text-white" : "border-[2px]"}`}
-                        onClick={() => handleButtonClick("RB")}
-                    >
-                        RB
+                        Attacker
                     </button>
 
                     <label className="input input-bordered flex items-center gap-2 mx-[1rem] bg-white rounded-full">
