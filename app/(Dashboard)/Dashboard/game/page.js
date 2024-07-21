@@ -58,7 +58,7 @@ export default function Home() {
 
         <div className=" w-full p-5 ">
           {
-            contests.fixtures.map((contest) => (
+            contests?.fixtures?.map((contest) => (
               <Contextcard contest={contest} type={contest.entry_type} key={contest.id} />
             ))
           }

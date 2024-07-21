@@ -18,12 +18,12 @@ const metadata = {
 export default function RootLayout({ children }) {
   const router = useRouter();
 
-  // useEffect(() => {
-  //   const accessToken = sessionStorage.getItem("access_token");
-  //   if (!accessToken) {
-  //     router.push("/Auth/login");
-  //   }
-  // }, [router]);
+  useEffect(() => {
+    const accessToken = sessionStorage.getItem("access_token");
+    if (!accessToken) {
+      router.push("/Auth/login");
+    }
+  }, [router]);
 
   return (
       <ReactQueryProvider>
