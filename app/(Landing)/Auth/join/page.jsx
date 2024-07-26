@@ -139,7 +139,7 @@ const Page = () => {
   const url = process.env.NEXT_PUBLIC_API_URL;
 
   const { mutate, isPending, isSuccess, isError, error } = postRequest(
-    `${url}register/`,
+    `${url}/auth/register/`,
     (response) => {
       console.log('Success:', response);
       toast.success('Registration was successful!');

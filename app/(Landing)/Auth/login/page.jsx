@@ -127,9 +127,10 @@ const Page = () => {
   const postRequest = usePostRequest();
 
   const url = process.env.NEXT_PUBLIC_API_URL;
+  console.log(url)
 
   const { mutate, isPending, isSuccess, isError, error } = postRequest(
-    `${url}login/`,
+    `${url}/auth/login/`,
     (response) => {
       console.log("Success:", response);
       const accessToken = response.data.access;
