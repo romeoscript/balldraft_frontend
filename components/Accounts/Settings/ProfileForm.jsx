@@ -9,7 +9,9 @@ import toast, { Toaster } from "react-hot-toast";
 import Loader from "@/components/Loader";
 
 const ProfileForm = () => {
-  const apiUrl = "https://api.balldraft.com/api/v1/profile"; 
+  const url = process.env.NEXT_PUBLIC_API_URL;
+  const apiUrl = `${url}/profile`; 
+
   const { data, isLoading, error } = useFetchDataPlans(apiUrl);
   const [formData, setFormData] = useState({
     username: "",

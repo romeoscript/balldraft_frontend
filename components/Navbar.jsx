@@ -7,7 +7,8 @@ import { useFetchDataPlans } from "@/Hooks/useFetch";
 const Navbar = () => {
   const router = usePathname();
   const isAuthRoute = router.includes("/Auth");
-  const apiUrl = "https://api.balldraft.com/api/v1/profile";
+  const url = process.env.NEXT_PUBLIC_API_URL;
+  const apiUrl = `${url}/profile`; 
   const { data, isLoading, error } = useFetchDataPlans(apiUrl);
   console.log(data , isLoading, 'fuck')
 

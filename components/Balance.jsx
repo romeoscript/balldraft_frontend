@@ -8,7 +8,8 @@ import Icon from '@/Reusable/Icons/Icons'
 import { useFetchDataPlans } from '@/Hooks/useFetch';
 
 const Balance = () => {
-    const apiUrl = "https://api.balldraft.com/api/v1/profile"
+    const url = process.env.NEXT_PUBLIC_API_URL;
+    const apiUrl = `${url}/profile`; 
     const { data: userProfile } = useFetchDataPlans(apiUrl);
 
     console.log(userProfile);

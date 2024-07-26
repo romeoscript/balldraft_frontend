@@ -13,7 +13,7 @@ const Verifyemail = ({  registrationData }) => {
   const url = process.env.NEXT_PUBLIC_API_URL;
   
   const { mutate, isPending, isSuccess, isError } = usePostRequest()(
-    `${url}verify-email/`,
+    `${url}/auth/verify-email/`,
     (response) => {
       toast.success('OTP verification was successful!');
       console.log("Email verified successfully:", response);
@@ -26,7 +26,7 @@ const Verifyemail = ({  registrationData }) => {
   );
   
   const { mutate: resendCode, isPending: resending, isSuccess: resendSuccess, isError: resendError } = usePostRequest()(
-    `${url}resend-code/`,
+    `${url}/auth/resend-code/`,
     (response) => {
       toast.success('OTP sent successfully!');
       console.log("OTP sent successfully!", response);

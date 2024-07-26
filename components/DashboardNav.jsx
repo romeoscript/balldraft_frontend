@@ -7,7 +7,8 @@ import starcup from '@/public/images/starcup.svg';
 import { useFetchDataPlans } from '@/Hooks/useFetch';
 
 const DashboardNav = () => {
-    const apiUrl = "https://api.balldraft.com/api/v1/profile";
+    const url = process.env.NEXT_PUBLIC_API_URL;
+    const apiUrl = `${url}/profile`; 
     const { data, isLoading, error } = useFetchDataPlans(apiUrl);
     console.log(data , isLoading, 'fuck')
     const  firstname = data?.full_name?.split(' ')[0]

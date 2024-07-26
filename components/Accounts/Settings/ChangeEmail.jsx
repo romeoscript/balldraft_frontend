@@ -71,7 +71,7 @@ const ChangeEmail = () => {
         const url = process.env.NEXT_PUBLIC_API_URL;
         try {
             const response = await axios.patch(
-                "https://api.balldraft.com/api/v1/profile/change-email/",
+                `${url}/profile/change-email/`,
                 { new_email: values.email },
                 {
                     headers: {
