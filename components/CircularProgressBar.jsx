@@ -16,18 +16,18 @@ const CircularProgressBar = () => {
   }, [progress]);
 
   return (
-    <div className="relative w-32 h-32">
+    <div className="relative w-32 h-32 hidden sm:block">
       <svg
         className="absolute top-0 left-0 transform -rotate-90"
-        viewBox="0 0 36 36"
+        viewBox="-5 -5 40 40"
       >
         <circle
           className=""
           strokeWidth="4"
           fill="transparent"
           r="15.91549430918954"
-          cx="18"
-          cy="18"
+          cx="15"
+          cy="15"
           stroke="#0F93FC" // Set stroke color here
           strokeDasharray={`${
             (progress / 100) * (2 * Math.PI * 15.91549430918954)

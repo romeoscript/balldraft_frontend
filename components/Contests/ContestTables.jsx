@@ -11,6 +11,8 @@ function ContestTables({ card }) {
     const [searchText, setSearchText] = useState("");
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [modalPlayer, setModalPlayer] = useState(null);
+    const [isOpen, setIsOpen] = useState(false);
+    const [gameName, setgameName] = useState('');
 
     const players = useMemo(() => {
         const transformHomeTeam = card.home_team[0].players.map(player => ({
@@ -32,6 +34,8 @@ function ContestTables({ card }) {
     const handleButtonClick = (buttonName) => {
         setActiveButton(buttonName);
         filterPlayers(buttonName, searchText);
+        setIsOpen(true)
+        setgameName(buttonName)
     };
 
     // Function to handle search input
@@ -125,9 +129,11 @@ function ContestTables({ card }) {
         },
     ];
 
+    const selectplayers = ["LW","CM","WR","LB","FLEX","DEF","CF","CDM"]
+
     return (
         <div className='flex flex-col lg:flex-row gap-8'>
-            <div className="flex-[1.5] ">
+            <div className=" hidden sm:block flex-[1.5] order-2 sm:order-1">
                 <div className="flex mb-[1.5rem]">
                     <button
                         className={`px-[0.7rem] text-sm py-[0.5rem]  rounded-[20px] m-1 ${activeButton === "All" ? "bg-gray-500 text-white" : "border-[2px]"}`}
@@ -167,8 +173,8 @@ function ContestTables({ card }) {
                 </div>
                 <Table columns={columns} dataSource={availablePlayers} className="blue-header no-border" rowKey="key" />
             </div>
-            <div className="flex-1">
-                <div className="flex items-center gap-8 px-5 mb-[1.3rem] text-black">
+            <div className="flex-1 order-1 sm:order-2">
+                <div className="flex justify-center tracking-wider sm:tracking-normal items-center gap-8 px-5 mb-[1.3rem] text-black">
                     <div className="flex flex-col gap-3 justify-center items-center">
                         <span className="text-[#808080] text-[0.7rem]">Total Salary</span>{" "}
                         <span className="font-semibold text-md">$1000 USD</span>
@@ -182,7 +188,83 @@ function ContestTables({ card }) {
                         <span className="font-semibold text-md">0.00</span>
                     </div>
                 </div>
-                <Table columns={selectedColumns} dataSource={selectedPlayers} className="blue-header no-border" rowKey="key" />
+
+                <div className='block sm:hidden'>
+                    
+                    <div className='flex justify-between py-2 border-b-[1.5px] border-[rgb(0,0,0,0.3)]'
+                    onClick={() => handleButtonClick("All")}
+                    >
+                        <span className='font-[600]'>Select Players</span>
+                        <span>All</span>
+                    </div>
+                    <div>
+                        {selectplayers.map((data)=>{
+                            return (
+                                <div className='flex justify-between py-2 border-b-[1.5px] border-[rgb(0,0,0,0.3)]'
+                                onClick={() => handleButtonClick(data)}
+                                >
+                                    <p className='text-[#294d6c] text-[12px] font-[600]'>Select { data}</p>
+                                    <button
+                                    className="relative"
+                                    >
+                                    <svg
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="relative top-[0.2rem] left-[40%]"
+                                    >
+                                        <path
+                                        d="M1 1L7 7L1 13"
+                                        stroke="black"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        />
+                                    </svg>
+                                    </button>
+                                </div>
+                            )
+                        })}
+
+                        {isOpen && (
+                            <div className='fixed top-0 z-50 h-full w-full bg-[rgb(0,0,0,0.6)] flex justify-center'>
+                                <div className='bg-white rounded-t-[30px] fixed bottom-0 w-[100%] h-[90%] overflow-auto p-2 flex justify-start flex-col gap-5 items-center'>
+                                    {/* cancel icon */}
+                                    <div
+                                        className="absolute top-3 bg-[rgb(0,0,0,0.1)] active:bg-[rgb(0,0,0,0.2)] right-5 bg-white p-3 rounded-[50%] "
+                                        onClick={()=>setIsOpen(false)}
+                                        >
+                                            <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <g clip-path="url(#clip0_311_6870)">
+                                                <path d="M22.5 7.5L7.5 22.5" stroke="#808080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M7.5 7.5L22.5 22.5" stroke="#808080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </g>
+                                                <defs>
+                                                <clipPath id="clip0_311_6870">
+                                                <rect width="30" height="30" fill="white"/>
+                                                </clipPath>
+                                                </defs>
+                                            </svg>
+                                        </div>
+
+                                    <div>
+                                        <p className='w-[100px] rounded h-[7px] bg-[rgb(0,0,0,0.4)]'></p>
+                                        <h2 className='text-[#000000] font-[600] text-[25px] text-center'>select {gameName}</h2>
+                                    </div>
+                                    
+                                    <input type="search" className='outline-none border-[1.5px] border-[rgb(0,0,0,0.6)] rounded-[50px] w-[95%] h-[70px] mt-5'/>
+
+                                    <Table columns={columns} dataSource={availablePlayers} className=" overflow-scroll  blue-header no-border bg-white" rowKey="key" />
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+
+
+                {<Table columns={selectedColumns} dataSource={selectedPlayers} className="blue-header no-border" rowKey="key"/>}
             </div>
             {modalPlayer && (
                 <Modal
@@ -233,7 +315,7 @@ function ContestTables({ card }) {
                         <aside className='basis-[49%]'>
                             <div className='bg-[#F9F9F9] rounded-md mb-[1rem] mt-[1rem]'>
                                 <h2 className='text-black text-lg'>Ball-Draft Platform</h2>
-                                <p className='flex gap-4 my-[0.5rem] text-sm text-gray-500'><span>2 days ago</span> <li className='list-disc'>Highlight</li></p>
+                                <p className='flex gap-4 my-[0.5rem] text-sm text-gray-500'><span>2 days ago</span> <li className='list-disc'>Highlight </li></p>
                                 <p className='text-[12px]'>Gabe Davis reeled in five of his nine targets for 26 yards and a touchdown during the 2023 regular session.
                                     Advice: Bell provided a serviceable backup veteran tight end for the Chiefs in 2023. But, he sat clearly behind Travis Kelce and Noag Gabe in the pecking order. Bulldozer’s contract expires following the season.</p>
                             </div>
