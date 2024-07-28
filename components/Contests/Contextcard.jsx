@@ -93,7 +93,7 @@ const Contextcard = ({ type, contest }) => {
                         <h2 className='font-bold text-lg text-[#012C51]'>$50,000</h2>
                         <span>Guaranteed In Prize</span>
                     </aside>
-                        <button className='bg-[#012C51] p-[1.4rem] rounded-full text-white' onClick={() => router.push('Dashboard/contest')}>
+                        <button className='bg-[#012C51] p-[1.4rem] rounded-full text-white' onClick={() => router.push(`/Dashboard/contest/${contest?.id}`)}>
                             Enter contest for $1
                         </button>
                         <span>8.00 PM</span>

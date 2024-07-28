@@ -10,7 +10,7 @@ const Navbar = () => {
   const url = process.env.NEXT_PUBLIC_API_URL;
   const apiUrl = `${url}/profile`; 
   const { data, isLoading, error } = useFetchDataPlans(apiUrl);
-  console.log(data , isLoading, 'fuck')
+
 
   return (
     <>
@@ -95,7 +95,7 @@ const Navbar = () => {
             </ul>
           </div>
           <div className="navbar-end ">
-            <a className="btn bg-[#012C51] rounded-[30px] ">Play now</a>
+            <a className="btn bg-[#012C51] rounded-[30px]">Play now</a>
           </div>
         </div>
       )}

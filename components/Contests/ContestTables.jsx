@@ -11,13 +11,14 @@ function ContestTables({ card }) {
     const [searchText, setSearchText] = useState("");
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [modalPlayer, setModalPlayer] = useState(null);
+console.log(card, 'fucked the bullshit')
 
     const players = useMemo(() => {
-        const transformHomeTeam = card.home_team[0].players.map(player => ({
+        const transformHomeTeam = card?.home_team[0]?.players.map(player => ({
             ...player,
-            team: card.home_team[0].team.name,
+            team: card?.home_team[0].team.name,
         }));
-        const transformAwayTeam = card.away_team[0].players.map(player => ({
+        const transformAwayTeam = card?.away_team[0]?.players.map(player => ({
             ...player,
             team: card.away_team[0].team.name,
         }));

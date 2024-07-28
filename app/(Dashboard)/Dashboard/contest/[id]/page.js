@@ -1,21 +1,37 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Sport from "@/public/images/Sport.svg";
 import GameCard from "@/Reusable/GameCard";
 import CircularProgressBar from "@/components/CircularProgressBar";
 import Players from "@/components/Players";
 import ContestTables from "@/components/Contests/ContestTables";
 import { useParams } from "next/navigation";
-import { useFetchDataPlans } from "@/Hooks/useFetch";
 
 const Page = () => {
   const [startIndex, setStartIndex] = useState(0);
   const [visibleCards, setVisibleCards] = useState(4); // Increased visible cards to 4
-  const  {id} = useParams();
-  const { data: cards } = useFetchDataPlans(apiUrl)
-  const apiUrl = `https://api.balldraft.com/get-fixture/${id}`;
+  const { id } = useParams();
+  const [cards, setCards] = useState(null);
+  const [loading, setLoading] = useState(true);
 
+ const apiUrl = `https://api.balldraft.com/get-fixture/${id}`;
+  // const apiUrl = `https://api.balldraft.com/get-fixture/1144582`;
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(apiUrl);
+        setCards(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [apiUrl]);
   const handlePrevious = () => {
     if (startIndex > 0) {
       setStartIndex(startIndex - 1);
@@ -23,10 +39,14 @@ const Page = () => {
   };
 
   const handleNext = () => {
-    if (startIndex < cards.length - visibleCards) {
+    if (startIndex < (cards?.length || 0) - visibleCards) {
       setStartIndex(startIndex + 1);
     }
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="p-[1.5rem]">
@@ -53,8 +73,8 @@ const Page = () => {
         </div>
       </div>
 
-      <div className="flex gap-5 relative overflow-hidden  items-center ">
-        <div className="rounded-xl flex gap-2 items-center  mb-10 p-5">
+      <div className="flex gap-5 relative overflow-hidden items-center ">
+        <div className="rounded-xl flex gap-2 items-center mb-10 p-5">
           <span className="font-semibold mr-10">8 games</span>
           <button
             onClick={handlePrevious}
@@ -85,19 +105,14 @@ const Page = () => {
           </button>
         </div>
 
-        <div className="flex  transition-transform duration-300 gap-5 ease-in-out transform">
-          {/* {cards
-            .slice(startIndex, startIndex + visibleCards)
-            .map((card, index) => ( */}
-              <GameCard
-                key={cards.id}
-                homeTeam={cards.home}
-                awayTeam={cards.away}
-                // homeScore={card.homeScore}
-                // awayScore={card.awayScore}
-                // time={card.time}
-              />
-            {/* )) */}
+        <div className="flex transition-transform duration-300 gap-5 ease-in-out transform">
+          {cards && (
+            <GameCard
+              key={cards.id}
+              homeTeam={cards.home}
+              awayTeam={cards.away}
+            />
+          )}
         </div>
 
         <div className="rounded-xl flex gap-2 items-center mb-10 p-5">
@@ -124,23 +139,23 @@ const Page = () => {
           </button>
         </div>
 
-        <div className=" flex   items-center mb-10 px-5">
+        <div className="flex items-center mb-10 px-5">
           <div className="flex flex-col gap-3 p-5 justify-center items-center">
             <span className="text-[#808080] text-[0.7rem]">ENTRIES</span>{" "}
             <span className="font-semibold text-md">405/2,300</span>
           </div>
-          <div className="flex flex-col gap-3 p-5  border-x-[#808080] border-x-[1px]  justify-center items-center">
+          <div className="flex flex-col gap-3 p-5 border-x-[#808080] border-x-[1px] justify-center items-center">
             <span className="text-[#808080] text-[0.7rem]">ENTRY FEE</span>{" "}
             <span className="font-semibold text-md">$20.00</span>
           </div>
-          <div className="flex flex-col gap-3 p-5  justify-center items-center">
+          <div className="flex flex-col gap-3 p-5 justify-center items-center">
             <span className="text-[#808080] text-[0.7rem]">PRIZE POOL</span>{" "}
             <span className="font-semibold text-md">$50,000.00</span>
           </div>
         </div>
       </div>
 
-       <ContestTables card={cards} />
+      {cards && <ContestTables card={cards} />}
     </div>
   );
 };
