@@ -11,12 +11,8 @@ function ContestTables({ card }) {
     const [searchText, setSearchText] = useState("");
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [modalPlayer, setModalPlayer] = useState(null);
-<<<<<<< HEAD
-console.log(card, 'fucked the bullshit')
-=======
     const [isOpen, setIsOpen] = useState(false);
     const [gameName, setgameName] = useState('');
->>>>>>> c0deMercenary-responsiveness
 
     const players = useMemo(() => {
         const transformHomeTeam = card?.home_team[0]?.players.map(player => ({
@@ -49,7 +45,7 @@ console.log(card, 'fucked the bullshit')
         filterPlayers(activeButton, value);
     };
 
-    // Function to filter players based on position and search text
+
     const filterPlayers = (position, text) => {
         let filteredPlayers = players;
         if (position !== "All") {

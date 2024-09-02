@@ -196,7 +196,6 @@ const Page = () => {
             <Button
               type="submit"
               className="bg-[#012C51] w-full text-white p-[1rem] hover:bg-[#4096FF] rounded-[30px]"
-              disabled={isSubmitting}
             >
               Sign in <ArrowForwardIcon />
             </Button>

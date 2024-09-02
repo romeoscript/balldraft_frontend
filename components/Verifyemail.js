@@ -11,6 +11,7 @@ const Verifyemail = ({  registrationData }) => {
   const [otp, setOtp] = useState(Array(TOTAL_OTP_NUM).fill(""));
   const inputsRef = useRef([]);
   const url = process.env.NEXT_PUBLIC_API_URL;
+  const email = registrationData?.data.data.email
   
   const { mutate, isPending, isSuccess, isError } = usePostRequest()(
     `${url}/auth/verify-email/`,
@@ -87,7 +88,7 @@ const Verifyemail = ({  registrationData }) => {
   const handleSubmit = () => {
     const otpString = otp.join("");
     if (otpString.length === TOTAL_OTP_NUM) {
-      mutate({ otp: otpString });
+      mutate({ otp: otpString, email: email });
       setOtp(Array(TOTAL_OTP_NUM).fill(""));
       inputsRef.current.forEach(input => {
         if (input) input.value = "";

@@ -16,7 +16,7 @@ const sportsImages = {
 const SportsCard = ({ type }) => {
     // Determine the background color based on the type
     const bgColor = sportsColors[type] || 'gray';
-    const sportImage = sportsImages[type] || ghostbg; // Fallback color if type is not matched
+    const sportImage = sportsImages[type] || ghostbg; 
 
     return (
         <div className='shadow-md rounded-[20px] p-[1rem] w-[350px] relative' style={{ width: '450px' }}>
@@ -24,7 +24,7 @@ const SportsCard = ({ type }) => {
                 619 Of 1.2K Entries
             </div>
             <div className='flex mt-[1rem] rounded-tl-sm'>
-                <h2 className='text-3xl text-black font-bold'>{type} Monday Field Goals</h2>
+                <h2 className='text-3xl text-black font-bold'>{type}</h2>
                 <img src={sportImage.src} alt={`${type} image`} />
             </div>
             <div className='flex gap-8'>
