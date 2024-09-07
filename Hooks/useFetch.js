@@ -11,7 +11,7 @@ const fetchPackages = async (url) => {
   const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
   try {
     const response = await axios.get(url, { headers });
-    console.log(response.data)
+    console.log('THE RESPONSE ',response.data)
     return response.data || [];
 
   } catch (error) {

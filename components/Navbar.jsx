@@ -3,6 +3,7 @@ import React from "react";
 import logo from "@/public/images/logo.png";
 import { usePathname, useRouter } from "next/navigation";
 import { useFetchDataPlans } from "@/Hooks/useFetch";
+import Link from "next/link";
 
 const Navbar = () => {
   const router = usePathname();
@@ -71,10 +72,10 @@ const Navbar = () => {
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1">
               <li>
-                <a>What We Offer</a>
+                <Link href="/">What We Offer</Link>
               </li>
               <li>
-                <a>About us</a>
+                <Link href="/about">About us</Link>
               </li>
               <li>
                 <details>
@@ -90,12 +91,12 @@ const Navbar = () => {
                 </details>
               </li>
               <li>
-                <a>Blog</a>
+                <Link href="/blog">Blog</Link>
               </li>
             </ul>
           </div>
           <div className="navbar-end ">
-            <a className="btn bg-[#012C51] rounded-[30px]">Play now</a>
+            <Link href={'/Dashboard'} className="btn bg-[#012C51] rounded-[30px]">Play now</Link>
           </div>
         </div>
       )}
