@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Table, Avatar, Modal } from 'antd';
 import logo from '@/public/images/logo.png';
+import toast from 'react-hot-toast';
 
 
 
@@ -13,18 +14,29 @@ function ContestTables({ card }) {
     const [modalPlayer, setModalPlayer] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
     const [gameName, setgameName] = useState('');
+    const [totalSalary, setTotalSalary] = useState(100000)
+    const [amountSpent, setAmountSpent] = useState(0)
+    const [lineUpLoading, setLineupLoading] = useState(false)
+    /**Generate a random number between 1 and 10 */
+    const generateRandomFppg = ()=>{
+        return Math.floor(Math.random() * 10) + 1
+    }
 
+    const home_team = card?.home_team_players
+    const away_team = card?.away_team_players
     const players = useMemo(() => {
-        const transformHomeTeam = card?.home_team[0]?.players.map(player => ({
+        const transformHomeTeam = home_team[0]?.players.map(player => ({
             ...player,
-            team: card?.home_team[0].team.name,
+            team: home_team[0].team.name,
+            fppg: generateRandomFppg()
         }));
-        const transformAwayTeam = card?.away_team[0]?.players.map(player => ({
+        const transformAwayTeam = away_team[0]?.players.map(player => ({
             ...player,
-            team: card.away_team[0].team.name,
+            team: away_team[0].team.name,
+            fppg: generateRandomFppg()
         }));
         return [...transformHomeTeam, ...transformAwayTeam]
-    }, [card.away_team, card.home_team])
+    }, [away_team, home_team])
 
     useEffect(() => {
         setAvailablePlayers(players);
@@ -59,13 +71,24 @@ function ContestTables({ card }) {
     };
 
     const addPlayer = (player) => {
-        setSelectedPlayers([...selectedPlayers, player]);
-        setAvailablePlayers(availablePlayers.filter(p => p.id !== player.id));
+        const remaining = totalSalary - amountSpent
+        const toRemain = remaining - player.fppg*10000
+        if(toRemain <0){
+            toast.error('Cannot add more players')
+        }
+        else{
+            setSelectedPlayers([...selectedPlayers, player]);
+            setAvailablePlayers(availablePlayers.filter(p => p.id !== player.id));
+            setAmountSpent((amt)=>amt+(player.fppg*10000))
+        }
+
     };
 
     const removePlayer = (player) => {
         setAvailablePlayers([...availablePlayers, player]);
         setSelectedPlayers(selectedPlayers.filter(p => p.id !== player.id));
+        setAmountSpent((amt)=>amt-(player.fppg*10000))
+
     };
 
     const showModal = (player) => {
@@ -81,6 +104,13 @@ function ContestTables({ card }) {
         setIsModalVisible(false);
     };
 
+    const handleConfirmLineUp = ()=>{}
+
+    const handleResetSelection = ()=>{
+        setAvailablePlayers((available)=>[...selectedPlayers, ...availablePlayers])
+        setSelectedPlayers([])
+        setAmountSpent(0)
+    }
 
     const columns = [
         {
@@ -96,7 +126,7 @@ function ContestTables({ card }) {
         { title: 'POSITION', dataIndex: 'position', key: 'position' },
         { title: 'TEAM', dataIndex: 'team', key: 'team' },
         { title: 'AGE', dataIndex: 'age', key: 'age' },
-        { title: 'NUMBER', dataIndex: 'number', key: 'number' },
+        { title: 'FPPG', dataIndex: 'fppg', key: 'fppg' },
         {
             render: (text, record) => (
                 <button className='rounded-[20px] border-[1px] text-[#012C51] p-[0.5rem] border-[#012C51]' onClick={() => addPlayer(record)}>
@@ -134,7 +164,7 @@ function ContestTables({ card }) {
     return (
         <div className='flex flex-col lg:flex-row gap-8'>
             <div className=" hidden sm:block flex-[1.5] order-2 sm:order-1">
-                <div className="flex mb-[1.5rem]">
+                <div className="flex mb-[1.5rem] max-[760px]:justify-between">
                     <button
                         className={`px-[0.7rem] text-sm py-[0.5rem]  rounded-[20px] m-1 ${activeButton === "All" ? "bg-gray-500 text-white" : "border-[2px]"}`}
                         onClick={() => handleButtonClick("All")}
@@ -166,7 +196,7 @@ function ContestTables({ card }) {
                         Attacker
                     </button>
 
-                    <label className="input input-bordered flex items-center gap-2 mx-[1rem] bg-white rounded-full">
+                    <label className="input input-bordered flex items-center gap-2 mx-[1rem] bg-white rounded-full max-[760px]:hidden">
                         <input type="text" className="grow" onChange={handleSearch} placeholder="Search players" />
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70"><path fillRule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clipRule="evenodd" /></svg>
                     </label>
@@ -177,11 +207,11 @@ function ContestTables({ card }) {
                 <div className="flex justify-center tracking-wider sm:tracking-normal items-center gap-8 px-5 mb-[1.3rem] text-black">
                     <div className="flex flex-col gap-3 justify-center items-center">
                         <span className="text-[#808080] text-[0.7rem]">Total Salary</span>{" "}
-                        <span className="font-semibold text-md">$1000 USD</span>
+                        <span className="font-semibold text-md">₦{totalSalary} NGN</span>
                     </div>
                     <div className="flex flex-col gap-3 justify-center items-center">
                         <span className="text-[#808080] text-[0.7rem]">Remaining</span>{" "}
-                        <span className="font-semibold text-md">$1000 USD</span>
+                        <span className="font-semibold text-md">₦{totalSalary-amountSpent} NGN</span>
                     </div>
                     <div className="flex flex-col gap-3 justify-center items-center">
                         <span className="text-[#808080] text-[0.7rem]">FPPG</span>{" "}
@@ -198,11 +228,11 @@ function ContestTables({ card }) {
                         <span>All</span>
                     </div>
                     <div>
-                        {selectplayers.map((data)=>{
+                        {selectplayers.map((data, index)=>{
                             return (
                                 <div className='flex justify-between py-2 border-b-[1.5px] border-[rgb(0,0,0,0.3)]'
                                 onClick={() => handleButtonClick(data)}
-                                >
+                                key={`player-${index}`}>
                                     <p className='text-[#294d6c] text-[12px] font-[600]'>Select { data}</p>
                                     <button
                                     className="relative"
@@ -265,6 +295,15 @@ function ContestTables({ card }) {
 
 
                 {<Table columns={selectedColumns} dataSource={selectedPlayers} className="blue-header no-border" rowKey="key"/>}
+
+                <div className='flex flex-col mt-4'>
+                    <p>Lineup completed</p>
+                    <div className="flex flex-row mt-5 flex-wrap gap-3">
+                        <button className='bg-sky-900 py-3 px-4 rounded-full text-white cursor-pointer disabled:bg-slate-400 disabled:cursor-not-allowed' onClick={handleConfirmLineUp} disabled={lineUpLoading}>Confirm lineup</button>
+                        <button className='bg-white border-2 border-sky-900 px-4 py-3 rounded-full text-sky-900 cursor-pointer' onClick={handleResetSelection}>Reset selection</button>
+                        <p className='my-3 w-full m-w-[500px]'>Please note that the maximum number of players allowed in a lineup is 9. Ensure your selections comply with this limit for optimal gameplay experience</p>
+                    </div>
+                </div>
             </div>
             {modalPlayer && (
                 <Modal
