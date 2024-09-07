@@ -4579,25 +4579,25 @@ const Page = () => {
     return league.fixtures.find((fixture) => (fixture.id = id));
   };
   useEffect(() => {
-    // setLeagues(dummyLeague)
-    // setCards(getCards(dummyLeague))
-    // console.log('CARDS', getCards(dummyLeague))
-    // setLoading(false)
-    const fetchData = async () => {
-      console.log("REQUEST STARTED");
-      try {
-        console.log("MAKING REQUEST");
-        const response = await axios.get(apiUrl);
-        // setLeagues(response.data); //get the league
-        setCards(response.data.fixtures.find((fixture) => fixture.id === id)); ///get the particular fixture from the league
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setLoading(false);
-      }
-    };
+    setLeagues(dummyLeague);
+    setCards(getCards(dummyLeague));
+    console.log("CARDS", getCards(dummyLeague));
+    setLoading(false);
+    // const fetchData = async () => {
+    //   console.log("REQUEST STARTED");
+    //   try {
+    //     console.log("MAKING REQUEST");
+    //     const response = await axios.get(apiUrl);
+    //     // setLeagues(response.data); //get the league
+    //     setCards(response.data.fixtures.find((fixture) => fixture.id === id)); ///get the particular fixture from the league
+    //     setLoading(false);
+    //   } catch (error) {
+    //     console.error("Error fetching data:", error);
+    //     setLoading(false);
+    //   }
+    // };
 
-    fetchData();
+    // fetchData();
   }, []);
 
   function scrollContainerLeftByWidth() {
