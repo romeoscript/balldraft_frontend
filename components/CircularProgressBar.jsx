@@ -1,19 +1,60 @@
 import { useEffect, useState } from "react";
 
-const CircularProgressBar = () => {
+const CircularProgressBar = ({contestTime}) => {
   const [progress, setProgress] = useState(0);
+  const [timeleft, setTimeLeft] = useState('00:00:00')
+  const [percentageCovered, setPercentageCovered] = useState(100)
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (progress < 70) {
-        setProgress((prevProgress) => prevProgress + 1);
-      } else {
-        clearInterval(interval);
-      }
-    }, 30);
+  // useEffect(() => {
+  //   const futureDate = new Date(contestTime);
+  //   const startDate = new Date();
+  //   const totalTime = futureDate - startDate;
+    
+  //   const calculateTimeLeft = () => {
+  //     const now = new Date();
 
-    return () => clearInterval(interval);
-  }, [progress]);
+  //     const timeDiff = futureDate - now;
+
+  //     if (timeDiff <= 0) {
+  //       setTimeLeft('00:00:00');
+  //       return;
+  //     }
+
+  //     const hours = Math.floor(timeDiff / (1000 * 60 * 60));
+  //     const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+  //     const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+  //     const formattedTime = 
+  //       String(hours).padStart(2, '0') + ':' + 
+  //       String(minutes).padStart(2, '0') + ':' + 
+  //       String(seconds).padStart(2, '0');
+
+  //     const percentageRemaining = (timeDiff / totalTime) * 100;
+  //     setTimeLeft(formattedTime);
+  //     setPercentageCovered(Math.ceil(100-percentageRemaining))
+  //   };
+
+  //   // calculateTimeLeft();
+
+  //   // Set interval to update time left every 10 seconds
+  //   const intervalId = setInterval(calculateTimeLeft, 1000);
+
+  //   return () => clearInterval(intervalId);
+  // }, [contestTime]);
+
+
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     if (progress < percentageCovered) {
+  //       setProgress((prevProgress) => prevProgress + 1);
+  //     } else {
+  //       clearInterval(interval);
+  //     }
+  //   }, 30);
+
+  //   return () => clearInterval(interval);
+  // }, [percentageCovered, progress]);
 
   return (
     <div className="relative w-32 h-32 hidden sm:block">
@@ -37,8 +78,8 @@ const CircularProgressBar = () => {
       <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center border rounded-full">
         {/* <span className="text-3xl font-bold">{progress}%</span> */}
         <div className="flex flex-col justify-center gap-2 items-center">
-          <span className="text-md font-bold">09:49:00</span>
-          <span className="text-sm">Left</span>
+          <span className="text-[1rem] font-bold">{timeleft}</span>
+          <span className="text-[0.7rem]">Left</span>
         </div>
       </div>
     </div>

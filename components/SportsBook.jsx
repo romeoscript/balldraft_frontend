@@ -1,11 +1,12 @@
 import SportsCard from "@/Reusable/SportsCard";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ghostbg from "@/public/images/ghostbg.svg";
 import ghostball from "@/public/images/ghostball.svg";
 import ufc from "@/public/images/UFC.svg";
 import { useFetchDataPlans } from "@/Hooks/useFetch";
+import LoadingTemplate from "./LoadingTemplate";
 
-const SportsBook = () => {
+const SportsBook = (props) => {
   const leagues = {
     total_leagues: 3,
     leagues: [
@@ -6742,18 +6743,35 @@ const SportsBook = () => {
   };
 
   const url = process.env.NEXT_PUBLIC_MICROSERVICE_URL;
-  const apiUrl = `${url}get-leagues`;
+  const apiUrl = `${url}get-leagues/`;
 
-  const { data: contests } = useFetchDataPlans(apiUrl);
-  console.log(contests, 'this is a live data ')
+  // const { data: contests } = useFetchDataPlans(apiUrl);
+  // console.log(contests, 'nawa oo')
+  // console.log('the leagues', contests.leagues)
+
   const [filter, setFilter] = useState("all");
+  
+  const urlLeagues = props.leagues
+  const loading = props.loading
 
-  const sportsCards = leagues.leagues.map((league) => {
+
+  if (loading){
+    return <LoadingTemplate/>
+  }
+
+
+
+  const sportsCards = urlLeagues.leagues?.map((league) => {
     return {
       id: league.league_id,
       type: league.league_name,
+      lowestEntry: league.lowest_entry_price,
+      highestEntry: league.highest_entry_price,
+      startTime: league.starting_time,
+      aggregateMaxEntry: league.aggregate_max_entry,
+      aggregateCurrentEntry: league.aggregate_current_entry
     };
-  });
+  }) || [];
 
   const filteredSportsCards = sportsCards.filter(
     (card) => filter === "all" || card.type === filter
@@ -6784,9 +6802,9 @@ const SportsBook = () => {
           </button>
         ))}
       </div>
-      <div className="grid lg:grid-cols-3 grid-cols-1 gap-4 lg:p-[1rem] ">
+      <div className="grid lg:grid-cols-3 grid-cols-1 gap-4 lg:p-[1rem]  ">
         {filteredSportsCards.map((card) => (
-          <SportsCard key={card.id} type={card.type} id={card.id} />
+          <SportsCard key={card.id} {...card} />
         ))}
       </div>
     </section>

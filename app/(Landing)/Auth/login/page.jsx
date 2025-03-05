@@ -127,7 +127,6 @@ const Page = () => {
   const postRequest = usePostRequest();
 
   const url = process.env.NEXT_PUBLIC_API_URL;
-  console.log(url)
 
   const { mutate, isPending, isSuccess, isError, error } = postRequest(
     `${url}/auth/login/`,
@@ -135,6 +134,7 @@ const Page = () => {
       console.log("Success:", response);
       const accessToken = response.data.access;
       sessionStorage.setItem("access_token", accessToken);
+      //TODO: set the redux state
       toast.success("login was successful!");
     },
     (error) => {
@@ -145,7 +145,6 @@ const Page = () => {
     }
   );
   const onSubmit = (values) => {
-    console.log(values);
     mutate(values);
     // Handle form submission
   };

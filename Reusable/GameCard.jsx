@@ -1,12 +1,14 @@
 import React from "react";
+import { generateRandomOdds } from "@/constants/constants";
 
 const GameCard = ({ homeTeam, awayTeam, homeScore, awayScore, time }) => {
+  const {overUnder, pointSpread} = generateRandomOdds()
   return (
-    <div className="rounded-xl shadow-md inline-block mb-10 shadow-xl p-5">
-      <div className="flex items-center justify-between mb-5">
-        <span className="text-sm">{homeTeam}</span>
+    <div className="rounded-xl shadow-md inline-block mb-10 py-2 px-5">
+      <div className="flex items-center justify-between mb-5 gap-3">
+        <span className="text-sm text-black">{homeTeam}</span>
         <div className="flex gap-2 items-center">
-          <span className="text-sm">{homeScore}</span>
+          <span className="text-sm">{overUnder}</span>
           <svg
             width="14"
             height="8"
@@ -25,10 +27,10 @@ const GameCard = ({ homeTeam, awayTeam, homeScore, awayScore, time }) => {
           </svg>
         </div>
       </div>
-      <div className="flex items-center justify-between mb-5">
-        <span className="text-sm">{awayTeam}</span>
+      <div className="flex items-center justify-between mb-5 gap-3">
+        <span className="text-sm text-black">{awayTeam}</span>
         <div className="flex gap-2 items-center">
-          <span className="text-sm">{awayScore}</span>
+          <span className="text-sm">{pointSpread}</span>
           <svg
             width="14"
             height="8"
@@ -47,7 +49,7 @@ const GameCard = ({ homeTeam, awayTeam, homeScore, awayScore, time }) => {
           </svg>
         </div>
       </div>
-      <p className="text-sm  text-center">{time}</p>
+      <p className="text-sm text-center text-slate-800">{time}</p>
     </div>
   );
 };
